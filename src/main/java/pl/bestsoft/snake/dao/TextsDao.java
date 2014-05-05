@@ -9,7 +9,7 @@ public class TextsDao {
     private static ResourceBundle resource;
 
     static {
-        resource = ResourceBundle.getBundle("messages");
+        resource = ResourceBundle.getBundle("properties/messages");
     }
 
     public static String getText(String key) {

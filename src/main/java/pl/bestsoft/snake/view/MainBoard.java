@@ -3,6 +3,7 @@ package pl.bestsoft.snake.view;
 import pl.bestsoft.snake.fakes.*;
 import pl.bestsoft.snake.model.Direction;
 import pl.bestsoft.snake.model.SnakeNumber;
+import pl.bestsoft.snake.util.ImageLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,15 +42,17 @@ public class MainBoard extends JPanel {
      */
     final private Image startImage;
 
+    private final Class<? extends MainBoard> aClass;
     /**
      * Tworzy nowy Main Board.
      */
     MainBoard() {
+        aClass = this.getClass();
         setPreferredSize(new Dimension(360, 360));
         paintAction = new HashMap<Class<? extends GameFake>, PaintAction>();
-        apple = new ImageIcon("images/Apple.png").getImage();
-        empty = new ImageIcon("images/Empty.png").getImage();
-        startImage = new ImageIcon("images/StartWindow.png").getImage();
+        apple = ImageLoader.load("Apple.png");
+        empty = ImageLoader.load("Empty.png");
+        startImage = ImageLoader.load("StartWindow.png");
         fillPaintAction();
         pictures = new HashMap<SnakeNumber, Map<BodyDirection, Image>>();
         pictures.put(SnakeNumber.FIRST, fillBodyImagePlayer1());
@@ -104,27 +107,28 @@ public class MainBoard extends JPanel {
      * Wypełnienie mapy obrazków pierwszego węża
      */
     private Map<BodyDirection, Image> fillBodyImagePlayer1() {
+
         final Map<BodyDirection, Image> bodyImagePlayer1 = new HashMap<BodyDirection, Image>();
-        bodyImagePlayer1.put(new BodyDirection(Direction.UNKNOW, Direction.EAST), new ImageIcon("images/TailEastPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.UNKNOW, Direction.WEST), new ImageIcon("images/TailWestPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.UNKNOW, Direction.NORTH), new ImageIcon("images/TailNorthPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.UNKNOW, Direction.SOUTH), new ImageIcon("images/TailSouthPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.WEST, Direction.WEST), new ImageIcon("images/BodyWestEastPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.EAST, Direction.EAST), new ImageIcon("images/BodyWestEastPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.NORTH, Direction.NORTH), new ImageIcon("images/BodyNorthSouthPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.SOUTH, Direction.SOUTH), new ImageIcon("images/BodyNorthSouthPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.SOUTH, Direction.EAST), new ImageIcon("images/BodyNorthEastPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.EAST, Direction.SOUTH), new ImageIcon("images/BodyWestSouthPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.EAST, Direction.NORTH), new ImageIcon("images/BodyWestNorthPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.NORTH, Direction.EAST), new ImageIcon("images/BodySouthEastPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.NORTH, Direction.WEST), new ImageIcon("images/BodyWestSouthPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.WEST, Direction.NORTH), new ImageIcon("images/BodyNorthEastPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.WEST, Direction.SOUTH), new ImageIcon("images/BodySouthEastPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.SOUTH, Direction.WEST), new ImageIcon("images/BodyWestNorthPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.WEST, Direction.UNKNOW), new ImageIcon("images/HeadWestPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.EAST, Direction.UNKNOW), new ImageIcon("images/HeadEastPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.SOUTH, Direction.UNKNOW), new ImageIcon("images/HeadSouthPlayer1.png").getImage());
-        bodyImagePlayer1.put(new BodyDirection(Direction.NORTH, Direction.UNKNOW), new ImageIcon("images/HeadNorthPlayer1.png").getImage());
+        bodyImagePlayer1.put(new BodyDirection(Direction.UNKNOW, Direction.EAST), ImageLoader.load("TailEastPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.UNKNOW, Direction.WEST), ImageLoader.load("TailWestPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.UNKNOW, Direction.NORTH), ImageLoader.load("TailNorthPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.UNKNOW, Direction.SOUTH), ImageLoader.load("TailSouthPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.WEST, Direction.WEST), ImageLoader.load("BodyWestEastPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.EAST, Direction.EAST), ImageLoader.load("BodyWestEastPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.NORTH, Direction.NORTH), ImageLoader.load("BodyNorthSouthPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.SOUTH, Direction.SOUTH), ImageLoader.load("BodyNorthSouthPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.SOUTH, Direction.EAST), ImageLoader.load("BodyNorthEastPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.EAST, Direction.SOUTH), ImageLoader.load("BodyWestSouthPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.EAST, Direction.NORTH), ImageLoader.load("BodyWestNorthPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.NORTH, Direction.EAST), ImageLoader.load("BodySouthEastPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.NORTH, Direction.WEST), ImageLoader.load("BodyWestSouthPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.WEST, Direction.NORTH), ImageLoader.load("BodyNorthEastPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.WEST, Direction.SOUTH), ImageLoader.load("BodySouthEastPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.SOUTH, Direction.WEST), ImageLoader.load("BodyWestNorthPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.WEST, Direction.UNKNOW), ImageLoader.load("HeadWestPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.EAST, Direction.UNKNOW), ImageLoader.load("HeadEastPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.SOUTH, Direction.UNKNOW), ImageLoader.load("HeadSouthPlayer1.png"));
+        bodyImagePlayer1.put(new BodyDirection(Direction.NORTH, Direction.UNKNOW), ImageLoader.load("HeadNorthPlayer1.png"));
         return Collections.unmodifiableMap(bodyImagePlayer1);
     }
 
@@ -133,26 +137,26 @@ public class MainBoard extends JPanel {
      */
     private Map<BodyDirection, Image> fillBodyImagePlayer2() {
         final Map<BodyDirection, Image> bodyImagePlayer2 = new HashMap<BodyDirection, Image>();
-        bodyImagePlayer2.put(new BodyDirection(Direction.UNKNOW, Direction.WEST), new ImageIcon("images/TailWestPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.UNKNOW, Direction.EAST), new ImageIcon("images/TailEastPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.UNKNOW, Direction.SOUTH), new ImageIcon("images/TailSouthPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.UNKNOW, Direction.NORTH), new ImageIcon("images/TailNorthPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.WEST, Direction.WEST), new ImageIcon("images/BodyWestEastPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.EAST, Direction.EAST), new ImageIcon("images/BodyWestEastPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.NORTH, Direction.NORTH), new ImageIcon("images/BodyNorthSouthPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.SOUTH, Direction.SOUTH), new ImageIcon("images/BodyNorthSouthPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.SOUTH, Direction.EAST), new ImageIcon("images/BodyNorthEastPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.EAST, Direction.SOUTH), new ImageIcon("images/BodyWestSouthPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.EAST, Direction.NORTH), new ImageIcon("images/BodyWestNorthPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.NORTH, Direction.EAST), new ImageIcon("images/BodySouthEastPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.NORTH, Direction.WEST), new ImageIcon("images/BodyWestSouthPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.WEST, Direction.NORTH), new ImageIcon("images/BodyNorthEastPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.WEST, Direction.SOUTH), new ImageIcon("images/BodySouthEastPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.SOUTH, Direction.WEST), new ImageIcon("images/BodyWestNorthPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.EAST, Direction.UNKNOW), new ImageIcon("images/HeadEastPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.WEST, Direction.UNKNOW), new ImageIcon("images/HeadWestPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.NORTH, Direction.UNKNOW), new ImageIcon("images/HeadNorthPlayer2.png").getImage());
-        bodyImagePlayer2.put(new BodyDirection(Direction.SOUTH, Direction.UNKNOW), new ImageIcon("images/HeadSouthPlayer2.png").getImage());
+        bodyImagePlayer2.put(new BodyDirection(Direction.UNKNOW, Direction.WEST), ImageLoader.load("TailWestPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.UNKNOW, Direction.EAST), ImageLoader.load("TailEastPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.UNKNOW, Direction.SOUTH), ImageLoader.load("TailSouthPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.UNKNOW, Direction.NORTH), ImageLoader.load("TailNorthPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.WEST, Direction.WEST), ImageLoader.load("BodyWestEastPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.EAST, Direction.EAST), ImageLoader.load("BodyWestEastPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.NORTH, Direction.NORTH), ImageLoader.load("BodyNorthSouthPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.SOUTH, Direction.SOUTH), ImageLoader.load("BodyNorthSouthPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.SOUTH, Direction.EAST), ImageLoader.load("BodyNorthEastPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.EAST, Direction.SOUTH), ImageLoader.load("BodyWestSouthPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.EAST, Direction.NORTH), ImageLoader.load("BodyWestNorthPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.NORTH, Direction.EAST), ImageLoader.load("BodySouthEastPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.NORTH, Direction.WEST), ImageLoader.load("BodyWestSouthPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.WEST, Direction.NORTH), ImageLoader.load("BodyNorthEastPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.WEST, Direction.SOUTH), ImageLoader.load("BodySouthEastPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.SOUTH, Direction.WEST), ImageLoader.load("BodyWestNorthPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.EAST, Direction.UNKNOW), ImageLoader.load("HeadEastPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.WEST, Direction.UNKNOW), ImageLoader.load("HeadWestPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.NORTH, Direction.UNKNOW), ImageLoader.load("HeadNorthPlayer2.png"));
+        bodyImagePlayer2.put(new BodyDirection(Direction.SOUTH, Direction.UNKNOW), ImageLoader.load("HeadSouthPlayer2.png"));
         return Collections.unmodifiableMap(bodyImagePlayer2);
     }
 
@@ -163,26 +167,26 @@ public class MainBoard extends JPanel {
      */
     private Map<BodyDirection, Image> fillBodyImagePlayer3() {
         final Map<BodyDirection, Image> bodyImagePlayer3 = new HashMap<BodyDirection, Image>();
-        bodyImagePlayer3.put(new BodyDirection(Direction.UNKNOW, Direction.EAST), new ImageIcon("images/TailEastPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.UNKNOW, Direction.WEST), new ImageIcon("images/TailWestPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.UNKNOW, Direction.NORTH), new ImageIcon("images/TailNorthPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.UNKNOW, Direction.SOUTH), new ImageIcon("images/TailSouthPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.WEST, Direction.WEST), new ImageIcon("images/BodyWestEastPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.EAST, Direction.EAST), new ImageIcon("images/BodyWestEastPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.NORTH, Direction.NORTH), new ImageIcon("images/BodyNorthSouthPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.SOUTH, Direction.SOUTH), new ImageIcon("images/BodyNorthSouthPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.SOUTH, Direction.EAST), new ImageIcon("images/BodyNorthEastPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.EAST, Direction.SOUTH), new ImageIcon("images/BodyWestSouthPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.EAST, Direction.NORTH), new ImageIcon("images/BodyWestNorthPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.NORTH, Direction.EAST), new ImageIcon("images/BodySouthEastPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.NORTH, Direction.WEST), new ImageIcon("images/BodyWestSouthPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.WEST, Direction.NORTH), new ImageIcon("images/BodyNorthEastPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.WEST, Direction.SOUTH), new ImageIcon("images/BodySouthEastPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.SOUTH, Direction.WEST), new ImageIcon("images/BodyWestNorthPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.WEST, Direction.UNKNOW), new ImageIcon("images/HeadWestPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.EAST, Direction.UNKNOW), new ImageIcon("images/HeadEastPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.SOUTH, Direction.UNKNOW), new ImageIcon("images/HeadSouthPlayer3.png").getImage());
-        bodyImagePlayer3.put(new BodyDirection(Direction.NORTH, Direction.UNKNOW), new ImageIcon("images/HeadNorthPlayer3.png").getImage());
+        bodyImagePlayer3.put(new BodyDirection(Direction.UNKNOW, Direction.EAST), ImageLoader.load("TailEastPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.UNKNOW, Direction.WEST), ImageLoader.load("TailWestPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.UNKNOW, Direction.NORTH), ImageLoader.load("TailNorthPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.UNKNOW, Direction.SOUTH), ImageLoader.load("TailSouthPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.WEST, Direction.WEST), ImageLoader.load("BodyWestEastPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.EAST, Direction.EAST), ImageLoader.load("BodyWestEastPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.NORTH, Direction.NORTH), ImageLoader.load("BodyNorthSouthPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.SOUTH, Direction.SOUTH), ImageLoader.load("BodyNorthSouthPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.SOUTH, Direction.EAST), ImageLoader.load("BodyNorthEastPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.EAST, Direction.SOUTH), ImageLoader.load("BodyWestSouthPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.EAST, Direction.NORTH), ImageLoader.load("BodyWestNorthPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.NORTH, Direction.EAST), ImageLoader.load("BodySouthEastPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.NORTH, Direction.WEST), ImageLoader.load("BodyWestSouthPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.WEST, Direction.NORTH), ImageLoader.load("BodyNorthEastPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.WEST, Direction.SOUTH), ImageLoader.load("BodySouthEastPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.SOUTH, Direction.WEST), ImageLoader.load("BodyWestNorthPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.WEST, Direction.UNKNOW), ImageLoader.load("HeadWestPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.EAST, Direction.UNKNOW), ImageLoader.load("HeadEastPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.SOUTH, Direction.UNKNOW), ImageLoader.load("HeadSouthPlayer3.png"));
+        bodyImagePlayer3.put(new BodyDirection(Direction.NORTH, Direction.UNKNOW), ImageLoader.load("HeadNorthPlayer3.png"));
         return Collections.unmodifiableMap(bodyImagePlayer3);
     }
 
@@ -193,26 +197,26 @@ public class MainBoard extends JPanel {
      */
     private Map<BodyDirection, Image> fillBodyImagePlayer4() {
         final Map<BodyDirection, Image> bodyImagePlayer4 = new HashMap<BodyDirection, Image>();
-        bodyImagePlayer4.put(new BodyDirection(Direction.UNKNOW, Direction.EAST), new ImageIcon("images/TailEastPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.UNKNOW, Direction.WEST), new ImageIcon("images/TailWestPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.UNKNOW, Direction.NORTH), new ImageIcon("images/TailNorthPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.UNKNOW, Direction.SOUTH), new ImageIcon("images/TailSouthPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.WEST, Direction.WEST), new ImageIcon("images/BodyWestEastPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.EAST, Direction.EAST), new ImageIcon("images/BodyWestEastPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.NORTH, Direction.NORTH), new ImageIcon("images/BodyNorthSouthPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.SOUTH, Direction.SOUTH), new ImageIcon("images/BodyNorthSouthPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.SOUTH, Direction.EAST), new ImageIcon("images/BodyNorthEastPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.EAST, Direction.SOUTH), new ImageIcon("images/BodyWestSouthPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.EAST, Direction.NORTH), new ImageIcon("images/BodyWestNorthPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.NORTH, Direction.EAST), new ImageIcon("images/BodySouthEastPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.NORTH, Direction.WEST), new ImageIcon("images/BodyWestSouthPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.WEST, Direction.NORTH), new ImageIcon("images/BodyNorthEastPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.WEST, Direction.SOUTH), new ImageIcon("images/BodySouthEastPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.SOUTH, Direction.WEST), new ImageIcon("images/BodyWestNorthPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.WEST, Direction.UNKNOW), new ImageIcon("images/HeadWestPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.EAST, Direction.UNKNOW), new ImageIcon("images/HeadEastPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.SOUTH, Direction.UNKNOW), new ImageIcon("images/HeadSouthPlayer4.png").getImage());
-        bodyImagePlayer4.put(new BodyDirection(Direction.NORTH, Direction.UNKNOW), new ImageIcon("images/HeadNorthPlayer4.png").getImage());
+        bodyImagePlayer4.put(new BodyDirection(Direction.UNKNOW, Direction.EAST), ImageLoader.load("TailEastPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.UNKNOW, Direction.WEST), ImageLoader.load("TailWestPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.UNKNOW, Direction.NORTH), ImageLoader.load("TailNorthPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.UNKNOW, Direction.SOUTH), ImageLoader.load("TailSouthPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.WEST, Direction.WEST), ImageLoader.load("BodyWestEastPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.EAST, Direction.EAST), ImageLoader.load("BodyWestEastPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.NORTH, Direction.NORTH), ImageLoader.load("BodyNorthSouthPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.SOUTH, Direction.SOUTH), ImageLoader.load("BodyNorthSouthPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.SOUTH, Direction.EAST), ImageLoader.load("BodyNorthEastPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.EAST, Direction.SOUTH), ImageLoader.load("BodyWestSouthPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.EAST, Direction.NORTH), ImageLoader.load("BodyWestNorthPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.NORTH, Direction.EAST), ImageLoader.load("BodySouthEastPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.NORTH, Direction.WEST), ImageLoader.load("BodyWestSouthPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.WEST, Direction.NORTH), ImageLoader.load("BodyNorthEastPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.WEST, Direction.SOUTH), ImageLoader.load("BodySouthEastPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.SOUTH, Direction.WEST), ImageLoader.load("BodyWestNorthPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.WEST, Direction.UNKNOW), ImageLoader.load("HeadWestPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.EAST, Direction.UNKNOW), ImageLoader.load("HeadEastPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.SOUTH, Direction.UNKNOW), ImageLoader.load("HeadSouthPlayer4.png"));
+        bodyImagePlayer4.put(new BodyDirection(Direction.NORTH, Direction.UNKNOW), ImageLoader.load("HeadNorthPlayer4.png"));
         return Collections.unmodifiableMap(bodyImagePlayer4);
     }
 
