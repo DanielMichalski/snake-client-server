@@ -1,6 +1,7 @@
 package pl.bestsoft.snake.game;
 
 import pl.bestsoft.snake.controler.Controler;
+import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.events.GameEvent;
 import pl.bestsoft.snake.model.Model;
 import pl.bestsoft.snake.view.View;
@@ -25,27 +26,27 @@ public class ChooseGameTypeWindow extends JFrame {
      * Tworzy nowe okno wyboru gry.
      */
     public ChooseGameTypeWindow() {
-        super(Messages.getString("ChooseGameTypeWindow.0")); //$NON-NLS-1$
+        super(TextsDao.getText("ChooseGameTypeWindow.0")); //$NON-NLS-1$
         blockingQueue = new LinkedBlockingQueue<GameEvent>();
         setSize(300, 200);
         setResizable(false);
         setLayout(new GridLayout(3, 2));
-        JButton newGamePlayer1 = new JButton(Messages.getString("ChooseGameTypeWindow.1")); //$NON-NLS-1$
+        JButton newGamePlayer1 = new JButton(TextsDao.getText("ChooseGameTypeWindow.1")); //$NON-NLS-1$
         newGamePlayer1.addActionListener(new NewGamePlayer1Action());
-        JButton newGamePlayer2 = new JButton(Messages.getString("ChooseGameTypeWindow.2")); //$NON-NLS-1$
+        JButton newGamePlayer2 = new JButton(TextsDao.getText("ChooseGameTypeWindow.2")); //$NON-NLS-1$
         newGamePlayer2.addActionListener(new NewGamePlayer2Action());
-        JButton newGamePlayer3 = new JButton(Messages.getString("ChooseGameTypeWindow.3"));  //$NON-NLS-1$
+        JButton newGamePlayer3 = new JButton(TextsDao.getText("ChooseGameTypeWindow.3"));  //$NON-NLS-1$
         newGamePlayer3.addActionListener(new NewGamePlayer3Action());
-        JButton joinGame = new JButton(Messages.getString("ChooseGameTypeWindow.4")); //$NON-NLS-1$
+        JButton joinGame = new JButton(TextsDao.getText("ChooseGameTypeWindow.4")); //$NON-NLS-1$
         joinGame.addActionListener(new JoinGame());
-        JButton makeServer = new JButton(Messages.getString("ChooseGameTypeWindow.5")); //$NON-NLS-1$
+        JButton makeServer = new JButton(TextsDao.getText("ChooseGameTypeWindow.5")); //$NON-NLS-1$
         makeServer.addActionListener(new MakeServer());
         add(newGamePlayer1);
         add(newGamePlayer2);
         add(newGamePlayer3);
         add(joinGame);
         add(makeServer);
-        add(new JLabel(Messages.getString("ChooseGameTypeWindow.6"), SwingConstants.CENTER)); //$NON-NLS-1$
+        add(new JLabel(TextsDao.getText("ChooseGameTypeWindow.6"), SwingConstants.CENTER)); //$NON-NLS-1$
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
@@ -153,7 +154,7 @@ public class ChooseGameTypeWindow extends JFrame {
             Model model = new Model();
             Controler controler = new Controler(model, blockingQueue, 1, howManySnakes);
             View view = new View();
-            view.display(Messages.getString("ChooseGameTypeWindow.7")); //$NON-NLS-1$
+            view.display(TextsDao.getText("ChooseGameTypeWindow.7")); //$NON-NLS-1$
             controler.begin();
         }
     }

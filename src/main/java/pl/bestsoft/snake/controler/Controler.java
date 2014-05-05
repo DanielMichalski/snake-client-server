@@ -1,5 +1,6 @@
 package pl.bestsoft.snake.controler;
 
+import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.events.*;
 import pl.bestsoft.snake.fakes.FakeMap;
 import pl.bestsoft.snake.message.InfoMessage;
@@ -91,7 +92,7 @@ public class Controler {
                 GameEvent gameEvent = blockingQueue.take();
                 actions.get(gameEvent.getClass()).perform(gameEvent);
             } catch (Exception e) {
-                System.out.println(Messages.getString("Controler.3"));
+                System.out.println(TextsDao.getText("Controler.3"));
                 e.printStackTrace();
             }
         }
@@ -177,7 +178,7 @@ public class Controler {
      */
     private void sendEndInformation() {
         if (!model.inGame()) {
-            networkModule.sendAllPlayersMessage(new InfoMessage(Messages.getString("Controler.2")));
+            networkModule.sendAllPlayersMessage(new InfoMessage(TextsDao.getText("Controler.2")));
         }
     }
 

@@ -10,8 +10,6 @@ import java.util.Map;
  * Przechowuje informacje o planszy gry
  */
 class Board {
-
-
     /**
      * Lista węży na planszy.
      */
