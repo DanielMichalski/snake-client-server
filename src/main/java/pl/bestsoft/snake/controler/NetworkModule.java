@@ -237,7 +237,7 @@ class NetworkModule {
                 } catch (IOException e) {
                     objectOutputStreams.remove(playerID);
                     sockets.remove(playerID);
-                    sendAllPlayersMessage(new InfoMessage("Gracz " + playerID.getPlayerID() + " zakończył gre "));
+                    sendAllPlayersMessage(new InfoMessage("Gracz " + playerID.getPlayerID() + " zakonczył gre "));
                     break;
                 } catch (Exception e) {
                     e.printStackTrace();

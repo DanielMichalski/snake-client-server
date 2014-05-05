@@ -1,9 +1,10 @@
-package pl.bestsoft.snake.view;
+package pl.bestsoft.snake.view.main_frame;
 
 import pl.bestsoft.snake.fakes.*;
 import pl.bestsoft.snake.model.Direction;
 import pl.bestsoft.snake.model.SnakeNumber;
 import pl.bestsoft.snake.util.ImageLoader;
+import pl.bestsoft.snake.view.BodyDirection;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,6 +44,7 @@ public class MainBoard extends JPanel {
     final private Image startImage;
 
     private final Class<? extends MainBoard> aClass;
+
     /**
      * Tworzy nowy Main Board.
      */

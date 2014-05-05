@@ -1,4 +1,4 @@
-package pl.bestsoft.snake.view;
+package pl.bestsoft.snake.view.main_frame;
 
 import pl.bestsoft.snake.fakes.ScoreFake;
 import pl.bestsoft.snake.message.ScoreMessage;

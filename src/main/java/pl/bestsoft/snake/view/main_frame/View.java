@@ -1,9 +1,10 @@
-package pl.bestsoft.snake.view;
+package pl.bestsoft.snake.view.main_frame;
 
 import pl.bestsoft.snake.message.BoardMessage;
 import pl.bestsoft.snake.message.GameMessage;
 import pl.bestsoft.snake.message.InfoMessage;
 import pl.bestsoft.snake.message.ScoreMessage;
+import pl.bestsoft.snake.view.ClientNetwork;
 
 import javax.swing.*;
 import java.awt.*;

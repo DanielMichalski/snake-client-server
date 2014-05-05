@@ -1,4 +1,4 @@
-package pl.bestsoft.snake.view;
+package pl.bestsoft.snake.view.main_frame;
 
 import javax.swing.*;
 import java.awt.*;
