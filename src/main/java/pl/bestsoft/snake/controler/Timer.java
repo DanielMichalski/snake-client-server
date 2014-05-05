@@ -1,5 +1,6 @@
 package pl.bestsoft.snake.controler;
 
+import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.events.GameEvent;
 import pl.bestsoft.snake.events.TimerEvent;
 
@@ -34,7 +35,7 @@ class Timer implements Runnable {
                 blockingQueue.add(new TimerEvent());
             }
         } catch (Exception e) {
-            System.out.println(Messages.getString("Timer.0"));
+            System.out.println(TextsDao.getText("Timer.0"));
             e.printStackTrace();
         }
     }

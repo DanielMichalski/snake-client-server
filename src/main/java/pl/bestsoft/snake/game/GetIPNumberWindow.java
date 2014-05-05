@@ -1,5 +1,6 @@
 package pl.bestsoft.snake.game;
 
+import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.view.View;
 
 import javax.swing.*;
@@ -25,15 +26,15 @@ public class GetIPNumberWindow extends JFrame {
      * Tworzy nowe okno do wpisania numeru IP serwera.
      */
     public GetIPNumberWindow() {
-        super(Messages.getString("GetIPNumberWindow.0")); //$NON-NLS-1$
+        super(TextsDao.getText("GetIPNumberWindow.0")); //$NON-NLS-1$
         setSize(250, 150);
         setLayout(new GridLayout(3, 1));
-        JLabel information = new JLabel(Messages.getString("GetIPNumberWindow.1")); //$NON-NLS-1$
+        JLabel information = new JLabel(TextsDao.getText("GetIPNumberWindow.1")); //$NON-NLS-1$
         add(information);
         ipNumberField = new JTextField(15);
-        ipNumberField.setText(Messages.getString("GetIPNumberWindow.2")); //$NON-NLS-1$
+        ipNumberField.setText(TextsDao.getText("GetIPNumberWindow.2")); //$NON-NLS-1$
         add(ipNumberField);
-        JButton okKey = new JButton(Messages.getString("GetIPNumberWindow.3")); //$NON-NLS-1$
+        JButton okKey = new JButton(TextsDao.getText("GetIPNumberWindow.3")); //$NON-NLS-1$
         okKey.addActionListener(new OkKeyLinstener());
         add(okKey);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

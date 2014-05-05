@@ -1,6 +1,7 @@
 package pl.bestsoft.snake.game;
 
 import pl.bestsoft.snake.controler.Controler;
+import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.events.GameEvent;
 import pl.bestsoft.snake.model.Model;
 import pl.bestsoft.snake.view.View;
@@ -23,16 +24,16 @@ public class ChooseNumberOfClientsWindow extends JFrame {
     private final LinkedBlockingQueue<GameEvent> blockingQueue;
 
     ChooseNumberOfClientsWindow(final LinkedBlockingQueue<GameEvent> blockingQueue) {
-        super(Messages.getString("ChooseNumberOfClientsWindow.0")); //$NON-NLS-1$
+        super(TextsDao.getText("ChooseNumberOfClientsWindow.0")); //$NON-NLS-1$
         setSize(200, 200);
         this.blockingQueue = blockingQueue;
         setLayout(new GridLayout(4, 1));
-        add(new JLabel(Messages.getString("ChooseNumberOfClientsWindow.1"), SwingConstants.CENTER)); //$NON-NLS-1$
-        JButton twoClients = new JButton(Messages.getString("ChooseNumberOfClientsWindow.2")); //$NON-NLS-1$
+        add(new JLabel(TextsDao.getText("ChooseNumberOfClientsWindow.1"), SwingConstants.CENTER)); //$NON-NLS-1$
+        JButton twoClients = new JButton(TextsDao.getText("ChooseNumberOfClientsWindow.2")); //$NON-NLS-1$
         twoClients.addActionListener(new TwoClientsAction());
-        JButton threeClients = new JButton(Messages.getString("ChooseNumberOfClientsWindow.3")); //$NON-NLS-1$
+        JButton threeClients = new JButton(TextsDao.getText("ChooseNumberOfClientsWindow.3")); //$NON-NLS-1$
         threeClients.addActionListener(new ThreeClientsAction());
-        JButton fourClients = new JButton(Messages.getString("ChooseNumberOfClientsWindow.4")); //$NON-NLS-1$
+        JButton fourClients = new JButton(TextsDao.getText("ChooseNumberOfClientsWindow.4")); //$NON-NLS-1$
         fourClients.addActionListener(new FourClientsAction());
         add(twoClients);
         add(threeClients);
@@ -124,7 +125,7 @@ public class ChooseNumberOfClientsWindow extends JFrame {
             Model model = new Model();
             Controler controler = new Controler(model, blockingQueue, howManyClients, howManyClients);
             View view = new View();
-            view.display(Messages.getString("ChooseNumberOfClientsWindow.5")); //$NON-NLS-1$
+            view.display(TextsDao.getText("ChooseNumberOfClientsWindow.5")); //$NON-NLS-1$
             controler.begin();
         }
     }
