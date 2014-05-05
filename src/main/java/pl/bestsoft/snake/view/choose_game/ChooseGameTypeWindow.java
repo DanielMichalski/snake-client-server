@@ -1,4 +1,4 @@
-﻿package pl.bestsoft.snake.view.choose_game;
+package pl.bestsoft.snake.view.choose_game;
 
 import pl.bestsoft.snake.controler.Controler;
 import pl.bestsoft.snake.dao.TextsDao;
