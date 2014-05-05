@@ -1,10 +1,10 @@
-package pl.bestsoft.snake.game;
+package pl.bestsoft.snake.view.choose_clients;
 
 import pl.bestsoft.snake.controler.Controler;
 import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.events.GameEvent;
 import pl.bestsoft.snake.model.Model;
-import pl.bestsoft.snake.view.View;
+import pl.bestsoft.snake.view.main_frame.View;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Okno umożliwiające wybór iloóci graczy na serwerze.
  */
-public class ChooseNumberOfClientsWindow extends JFrame {
+public class NumberOfClientsFrame extends JFrame {
 
     /**
      * Tworzy okno do wyboru ilości graczy.
@@ -23,17 +23,17 @@ public class ChooseNumberOfClientsWindow extends JFrame {
     private static final long serialVersionUID = 1L;
     private final LinkedBlockingQueue<GameEvent> blockingQueue;
 
-    ChooseNumberOfClientsWindow(final LinkedBlockingQueue<GameEvent> blockingQueue) {
-        super(TextsDao.getText("ChooseNumberOfClientsWindow.0")); //$NON-NLS-1$
+    public NumberOfClientsFrame(final LinkedBlockingQueue<GameEvent> blockingQueue) {
+        super(TextsDao.getText("ChooseNumberOfClientsWindow.0"));
         setSize(200, 200);
         this.blockingQueue = blockingQueue;
         setLayout(new GridLayout(4, 1));
-        add(new JLabel(TextsDao.getText("ChooseNumberOfClientsWindow.1"), SwingConstants.CENTER)); //$NON-NLS-1$
-        JButton twoClients = new JButton(TextsDao.getText("ChooseNumberOfClientsWindow.2")); //$NON-NLS-1$
+        add(new JLabel(TextsDao.getText("ChooseNumberOfClientsWindow.1"), SwingConstants.CENTER));
+        JButton twoClients = new JButton(TextsDao.getText("ChooseNumberOfClientsWindow.2"));
         twoClients.addActionListener(new TwoClientsAction());
-        JButton threeClients = new JButton(TextsDao.getText("ChooseNumberOfClientsWindow.3")); //$NON-NLS-1$
+        JButton threeClients = new JButton(TextsDao.getText("ChooseNumberOfClientsWindow.3"));
         threeClients.addActionListener(new ThreeClientsAction());
-        JButton fourClients = new JButton(TextsDao.getText("ChooseNumberOfClientsWindow.4")); //$NON-NLS-1$
+        JButton fourClients = new JButton(TextsDao.getText("ChooseNumberOfClientsWindow.4"));
         fourClients.addActionListener(new FourClientsAction());
         add(twoClients);
         add(threeClients);
@@ -125,7 +125,7 @@ public class ChooseNumberOfClientsWindow extends JFrame {
             Model model = new Model();
             Controler controler = new Controler(model, blockingQueue, howManyClients, howManyClients);
             View view = new View();
-            view.display(TextsDao.getText("ChooseNumberOfClientsWindow.5")); //$NON-NLS-1$
+            view.display(TextsDao.getText("ChooseNumberOfClientsWindow.5"));
             controler.begin();
         }
     }

@@ -1,6 +1,6 @@
 package pl.bestsoft.snake;
 
-import pl.bestsoft.snake.game.ChooseGameTypeWindow;
+import pl.bestsoft.snake.view.choose_game.ChooseGameTypeWindow;
 
 import javax.swing.*;
 import java.awt.*;

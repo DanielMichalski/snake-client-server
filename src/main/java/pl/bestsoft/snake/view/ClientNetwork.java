@@ -5,6 +5,7 @@ import pl.bestsoft.snake.message.BoardMessage;
 import pl.bestsoft.snake.message.GameMessage;
 import pl.bestsoft.snake.message.InfoMessage;
 import pl.bestsoft.snake.message.ScoreMessage;
+import pl.bestsoft.snake.view.main_frame.View;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,7 +17,7 @@ import java.util.HashMap;
  * Klasa odpowiedzialna za komunikację z serwerem.
  */
 
-class ClientNetwork {
+public class ClientNetwork {
     /**
      * Widok klienta.
      */
@@ -30,7 +31,7 @@ class ClientNetwork {
      */
     private ObjectOutputStream objectOutputStream;
 
-    ClientNetwork(final View view) {
+    public ClientNetwork(final View view) {
         this.view = view;
     }
 
@@ -39,7 +40,7 @@ class ClientNetwork {
      *
      * @param IpNumber numer IP serwera
      */
-    void conectToServer(final String IpNumber) {
+    public void conectToServer(final String IpNumber) {
         try {
             clientSocket = new Socket(IpNumber, 5555);
             objectOutputStream = new ObjectOutputStream(
@@ -57,7 +58,7 @@ class ClientNetwork {
      *
      * @param playerEvent
      */
-    void sendEvent(final PlayerEvent playerEvent) {
+    public void sendEvent(final PlayerEvent playerEvent) {
         if (objectOutputStream == null) {
             view.showInfoMessage(new InfoMessage("Brak połączenia z serwerem"));
             return;
@@ -104,7 +105,7 @@ class ClientNetwork {
                     GameMessage gameMessage = (GameMessage) objectInputStream.readObject();
                     actions.get(gameMessage.getClass()).perform(gameMessage);
                 } catch (IOException e) {
-                    view.showInfoMessage(new InfoMessage("Utracono połączenie z serwerem"));
+                    view.showInfoMessage(new InfoMessage("Utracono polaczenie z serwerem"));
                     break;
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -1,22 +1,27 @@
-package pl.bestsoft.snake.game;
+﻿package pl.bestsoft.snake.view.choose_game;
 
 import pl.bestsoft.snake.controler.Controler;
 import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.events.GameEvent;
 import pl.bestsoft.snake.model.Model;
-import pl.bestsoft.snake.view.View;
+import pl.bestsoft.snake.view.choose_clients.NumberOfClientsFrame;
+import pl.bestsoft.snake.view.choose_ip.GetIPNumberWindow;
+import pl.bestsoft.snake.view.main_frame.View;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
  * Wyświetla okno z moliwością wyboru rodzaju gry.
  */
 public class ChooseGameTypeWindow extends JFrame {
-    private static final long serialVersionUID = 1L;
+    private static final int BUTTON_WIDTH = 260;
+    private static final int BUTTON_HEIGHT = 78;
+
     /**
      * Kolejka blokująca eventy
      */
@@ -26,29 +31,57 @@ public class ChooseGameTypeWindow extends JFrame {
      * Tworzy nowe okno wyboru gry.
      */
     public ChooseGameTypeWindow() {
-        super(TextsDao.getText("ChooseGameTypeWindow.0")); //$NON-NLS-1$
         blockingQueue = new LinkedBlockingQueue<GameEvent>();
-        setSize(300, 200);
+
+        setupFrame();
+        initializeComponents();
+    }
+
+    private void setupFrame() {
+        setTitle(TextsDao.getText("ChooseGameTypeWindow.0"));
+        setSize(560, 350);
         setResizable(false);
-        setLayout(new GridLayout(3, 2));
-        JButton newGamePlayer1 = new JButton(TextsDao.getText("ChooseGameTypeWindow.1")); //$NON-NLS-1$
-        newGamePlayer1.addActionListener(new NewGamePlayer1Action());
-        JButton newGamePlayer2 = new JButton(TextsDao.getText("ChooseGameTypeWindow.2")); //$NON-NLS-1$
-        newGamePlayer2.addActionListener(new NewGamePlayer2Action());
-        JButton newGamePlayer3 = new JButton(TextsDao.getText("ChooseGameTypeWindow.3"));  //$NON-NLS-1$
-        newGamePlayer3.addActionListener(new NewGamePlayer3Action());
-        JButton joinGame = new JButton(TextsDao.getText("ChooseGameTypeWindow.4")); //$NON-NLS-1$
-        joinGame.addActionListener(new JoinGame());
-        JButton makeServer = new JButton(TextsDao.getText("ChooseGameTypeWindow.5")); //$NON-NLS-1$
-        makeServer.addActionListener(new MakeServer());
-        add(newGamePlayer1);
-        add(newGamePlayer2);
-        add(newGamePlayer3);
-        add(joinGame);
-        add(makeServer);
-        add(new JLabel(TextsDao.getText("ChooseGameTypeWindow.6"), SwingConstants.CENTER)); //$NON-NLS-1$
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(null);
         setLocationRelativeTo(null);
+    }
+
+    private void initializeComponents() {
+        JButton player1 = createBtn("player1.png", 10, 10, "1 Gracz", new NewGamePlayer1Action());
+        JButton player2 = createBtn("player2.png", 10, 120, "2 Graczy", new NewGamePlayer2Action());
+        JButton player3 = createBtn("player3.png", 10, 230, "3 Graczy", new NewGamePlayer3Action());
+
+        JButton createServer = createBtn("create.png", 280, 10, "Utworz gre", new MakeServer());
+        JButton joinServer = createBtn("join.png", 280, 120, "Dolacz do gry", new JoinGame());
+
+        add(player1);
+        add(player2);
+        add(player3);
+        add(createServer);
+        add(joinServer);
+    }
+
+    @Override
+    public void paint(Graphics g) {
+        super.paintComponents(g);
+        Toolkit tool = Toolkit.getDefaultToolkit();
+
+        URL url = getClass().getResource("/images/snake.png");
+
+        Image img = tool.getImage(url);
+        g.drawImage(img, 360, 240, this);
+    }
+
+    private JButton createBtn(String imageTitle, int x, int y, String label, ActionListener listener) {
+        JButton btn = new JButton(label);
+        btn.addActionListener(listener);
+        btn.setFont(new Font("Arial", Font.BOLD, 14));
+        btn.setFocusable(false);
+        btn.setBounds(x, y, BUTTON_WIDTH, BUTTON_HEIGHT);
+        btn.setForeground(Color.darkGray);
+        Icon icon = new ImageIcon(getClass().getResource("/images/" + imageTitle));
+        btn.setIcon(icon);
+        btn.setHorizontalAlignment(SwingConstants.LEFT);
+        return btn;
     }
 
     /**
@@ -93,7 +126,7 @@ public class ChooseGameTypeWindow extends JFrame {
     private class MakeServer implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
-            ChooseNumberOfClientsWindow chooseNumberOfClientsWindow = new ChooseNumberOfClientsWindow(blockingQueue);
+            NumberOfClientsFrame chooseNumberOfClientsWindow = new NumberOfClientsFrame(blockingQueue);
             chooseNumberOfClientsWindow.display();
             hideWindow();
         }
@@ -154,7 +187,7 @@ public class ChooseGameTypeWindow extends JFrame {
             Model model = new Model();
             Controler controler = new Controler(model, blockingQueue, 1, howManySnakes);
             View view = new View();
-            view.display(TextsDao.getText("ChooseGameTypeWindow.7")); //$NON-NLS-1$
+            view.display(TextsDao.getText("ChooseGameTypeWindow.7"));
             controler.begin();
         }
     }

@@ -4,9 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
-/**
- * Author: Daniel
- */
 public class ImageLoader {
     private static Class<? extends ImageLoader> aClass;
 

@@ -1,13 +1,14 @@
-package pl.bestsoft.snake.view;
+package pl.bestsoft.snake.view.main_frame;
 
 import pl.bestsoft.snake.events.*;
 import pl.bestsoft.snake.snake.KeySetID;
+import pl.bestsoft.snake.view.ClientNetwork;
+import pl.bestsoft.snake.view.choose_game.ChooseGameTypeWindow;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 /**
  * Ramka w której są wyświetlane poszczególne elementy składowe GUI.
@@ -23,7 +24,7 @@ public class MainFrame extends JFrame {
      */
     private final ClientNetwork clientNetwork;
 
-    MainFrame(final ClientNetwork clientNetwork) {
+    public MainFrame(final ClientNetwork clientNetwork) {
         super("Snake");
         this.clientNetwork = clientNetwork;
         setSize(440, 410); // 440 410
@@ -36,7 +37,22 @@ public class MainFrame extends JFrame {
         menu.add(gameMenu);
         setJMenuBar(menu);
         addKeyListener(new BoardKeyListener());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        addWindowListener(new MainFrameWindowAdapter());
+    }
+
+    class MainFrameWindowAdapter extends WindowAdapter {
+        @Override
+        public void windowClosing(WindowEvent e) {
+            EventQueue.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    ChooseGameTypeWindow frame = new ChooseGameTypeWindow();
+                    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+                    frame.setVisible(true);
+                }
+            });
+        }
     }
 
     /**
