@@ -4,14 +4,15 @@ import pl.bestsoft.snake.controler.Controler;
 import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.events.GameEvent;
 import pl.bestsoft.snake.model.Model;
+import pl.bestsoft.snake.util.Const;
+import pl.bestsoft.snake.util.ImageLoader;
 import pl.bestsoft.snake.view.choose_clients.NumberOfClientsFrame;
 import pl.bestsoft.snake.view.choose_ip.GetIPNumberWindow;
 import pl.bestsoft.snake.view.main_frame.View;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.net.URL;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -19,7 +20,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Wyświetla okno z moliwością wyboru rodzaju gry.
  */
 public class ChooseGameTypeWindow extends JFrame {
-    private static final int BUTTON_WIDTH = 260;
+    private static final int BUTTON_WIDTH = 275;
     private static final int BUTTON_HEIGHT = 78;
 
     /**
@@ -39,25 +40,77 @@ public class ChooseGameTypeWindow extends JFrame {
 
     private void setupFrame() {
         setTitle(TextsDao.getText("ChooseGameTypeWindow.0"));
-        setSize(560, 350);
+        setSize(700, 410);
         setResizable(false);
         setLayout(null);
         setLocationRelativeTo(null);
+        getContentPane().setBackground(Const.Colors.BACKGROUND_COLOR);
+        setUndecorated(true);
+        setWindowRemoveble();
     }
 
     private void initializeComponents() {
-        JButton player1 = createBtn("player1.png", 10, 10, "1 Gracz", new NewGamePlayer1Action());
-        JButton player2 = createBtn("player2.png", 10, 120, "2 Graczy", new NewGamePlayer2Action());
-        JButton player3 = createBtn("player3.png", 10, 230, "3 Graczy", new NewGamePlayer3Action());
+        String player1Text = TextsDao.getText("ChooseGameTypeWindow.1");
+        String player2Text = TextsDao.getText("ChooseGameTypeWindow.2");
+        String player3Text = TextsDao.getText("ChooseGameTypeWindow.3");
+        String createServerText = TextsDao.getText("ChooseGameTypeWindow.5");
+        String joinServerText = TextsDao.getText("ChooseGameTypeWindow.4");
 
-        JButton createServer = createBtn("create.png", 280, 10, "Utworz gre", new MakeServer());
-        JButton joinServer = createBtn("join.png", 280, 120, "Dolacz do gry", new JoinGame());
+        JButton player1 = createBtn("player1.png", 50, 100, player1Text, new NewGamePlayer1Action());
+        JButton player2 = createBtn("player2.png", 50, 200, player2Text, new NewGamePlayer2Action());
+        JButton player3 = createBtn("player3.png", 50, 300, player3Text, new NewGamePlayer3Action());
+
+        JButton createServer = createBtn("create.png", 370, 100, createServerText, new MakeServer());
+        JButton joinServer = createBtn("join.png", 370, 200, joinServerText, new JoinGame());
+
+        JLabel titleLabel = createTitleLabel();
+        JLabel closeBtn = createCloseBtn();
 
         add(player1);
         add(player2);
         add(player3);
         add(createServer);
         add(joinServer);
+        add(titleLabel);
+        add(closeBtn);
+    }
+
+    private JLabel createCloseBtn() {
+        final ImageIcon imgUn = new ImageIcon(ImageLoader.load("close_btn.png"));
+        final JLabel button = new JLabel(imgUn);
+        button.addMouseListener(new CloseBtnAction());
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        button.setBounds(655, 5, 40, 40);
+        return button;
+    }
+
+    private JLabel createTitleLabel() {
+        final JLabel button = new JLabel("Snake 2D");
+        button.setForeground(Const.Colors.LABEL_COLOR);
+        button.setFont(new Font("Ravie", Font.PLAIN, 40));
+        button.setBounds(240, 20, 300, 40);
+        return button;
+    }
+
+    private void setWindowRemoveble() {
+        final Point point = new Point();
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                if (!e.isMetaDown()) {
+                    point.x = e.getX();
+                    point.y = e.getY();
+                }
+            }
+        });
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                if (!e.isMetaDown()) {
+                    Point p = getLocation();
+                    setLocation(p.x + e.getX() - point.x,
+                            p.y + e.getY() - point.y);
+                }
+            }
+        });
     }
 
     @Override
@@ -68,7 +121,7 @@ public class ChooseGameTypeWindow extends JFrame {
         URL url = getClass().getResource("/images/snake.png");
 
         Image img = tool.getImage(url);
-        g.drawImage(img, 360, 240, this);
+        g.drawImage(img, 460, 290, this);
     }
 
     private JButton createBtn(String imageTitle, int x, int y, String label, ActionListener listener) {
@@ -106,6 +159,11 @@ public class ChooseGameTypeWindow extends JFrame {
                 setVisible(false);
             }
         });
+    }
+
+
+    private void closeWindow() {
+        dispose();
     }
 
     /**
@@ -166,7 +224,13 @@ public class ChooseGameTypeWindow extends JFrame {
             hideWindow();
             new NewGameOneClient(3).start();
         }
+    }
 
+    private class CloseBtnAction extends MouseAdapter {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            closeWindow();
+        }
     }
 
     /**
