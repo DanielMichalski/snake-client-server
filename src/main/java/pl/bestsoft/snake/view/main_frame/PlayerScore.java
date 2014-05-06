@@ -17,8 +17,9 @@ class PlayerScore extends JPanel {
     PlayerScore(final Color color) {
         setSize(40, 50);
         setBackground(color);
-        setLayout(new GridLayout(1, 1));
+        setLayout(null);
         score = new JLabel();
+        score.setBounds(30, 20, 50, 30);
         score.setText("0");
         add(score);
     }

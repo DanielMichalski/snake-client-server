@@ -1,5 +1,6 @@
 package pl.bestsoft.snake.view.choose_game;
 
+import javafx.application.Application;
 import pl.bestsoft.snake.controler.Controler;
 import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.events.GameEvent;
@@ -164,11 +165,6 @@ public class ChooseGameTypeWindow extends JFrame {
         });
     }
 
-
-    private void closeWindow() {
-        dispose();
-    }
-
     /**
      * Utworzenie okna z możliwością wpisania numeru IP serwera.
      */
@@ -177,6 +173,7 @@ public class ChooseGameTypeWindow extends JFrame {
         public void actionPerformed(final ActionEvent e) {
             GetIPNumberWindow getIPNumberWindow = new GetIPNumberWindow();
             hideWindow();
+            getIPNumberWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
             getIPNumberWindow.display();
         }
     }
@@ -232,7 +229,7 @@ public class ChooseGameTypeWindow extends JFrame {
     private class CloseBtnAction extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
-            closeWindow();
+            System.exit(0);
         }
     }
 

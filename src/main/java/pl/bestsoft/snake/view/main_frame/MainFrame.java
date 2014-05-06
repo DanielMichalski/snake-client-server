@@ -2,6 +2,8 @@ package pl.bestsoft.snake.view.main_frame;
 
 import pl.bestsoft.snake.events.*;
 import pl.bestsoft.snake.snake.KeySetID;
+import pl.bestsoft.snake.util.Const;
+import pl.bestsoft.snake.util.ImageLoader;
 import pl.bestsoft.snake.view.ClientNetwork;
 import pl.bestsoft.snake.view.choose_game.ChooseGameTypeWindow;
 
@@ -14,39 +16,73 @@ import java.awt.event.KeyEvent;
  * Ramka w której są wyświetlane poszczególne elementy składowe GUI.
  */
 public class MainFrame extends JFrame {
-    private static final long serialVersionUID = 1L;
-    /**
-     * Menu rozwijalne.
-     */
-    private final JMenuBar menu;
+
     /**
      * Moduł sieciowy obsługujący poczenie z serwerem.
      */
     private final ClientNetwork clientNetwork;
 
     public MainFrame(final ClientNetwork clientNetwork) {
-        super("Snake");
         this.clientNetwork = clientNetwork;
-        setSize(440, 410); // 440 410
-        setResizable(false);
-        menu = new JMenuBar();
-        JMenu gameMenu = new JMenu("Gra");
-        JMenuItem newGame = new JMenuItem("Nowa gra");
-        newGame.addActionListener(new NewGameAction());
-        gameMenu.add(newGame);
-        menu.add(gameMenu);
-        setJMenuBar(menu);
-        addKeyListener(new BoardKeyListener());
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        addWindowListener(new MainFrameWindowAdapter());
+
+        setupFrame();
+        initializeComponents();
     }
 
-    class MainFrameWindowAdapter extends WindowAdapter {
+    private void setupFrame() {
+        setSize(465, 550);
+        setResizable(false);
+        setUndecorated(true);
+        addKeyListener(new BoardKeyListener());
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLayout(null);
+        setUndecorated(true);
+        getContentPane().setBackground(Const.Colors.BACKGROUND_COLOR);
+        setWindowMoveble();
+    }
+
+    private void initializeComponents() {
+        JLabel closeBtn = createCloseBtn();
+        add(closeBtn);
+    }
+
+    private JLabel createCloseBtn() {
+        final ImageIcon imgUn = new ImageIcon(ImageLoader.load("close_btn.png"));
+        final JLabel button = new JLabel(imgUn);
+        button.addMouseListener(new CloseBtnAction());
+        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        button.setBounds(420, 5, 40, 40);
+        return button;
+    }
+
+    private void setWindowMoveble() {
+        final Point point = new Point();
+        addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+                if (!e.isMetaDown()) {
+                    point.x = e.getX();
+                    point.y = e.getY();
+                }
+            }
+        });
+        addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseDragged(MouseEvent e) {
+                if (!e.isMetaDown()) {
+                    Point p = getLocation();
+                    setLocation(p.x + e.getX() - point.x,
+                            p.y + e.getY() - point.y);
+                }
+            }
+        });
+    }
+
+    private class CloseBtnAction extends MouseAdapter {
         @Override
-        public void windowClosing(WindowEvent e) {
+        public void mouseClicked(MouseEvent e) {
             EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
+                    dispose();
                     ChooseGameTypeWindow frame = new ChooseGameTypeWindow();
                     frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                     frame.setVisible(true);

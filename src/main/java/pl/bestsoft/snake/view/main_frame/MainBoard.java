@@ -50,7 +50,7 @@ public class MainBoard extends JPanel {
      */
     MainBoard() {
         aClass = this.getClass();
-        setPreferredSize(new Dimension(360, 360));
+        setBounds(50, 50, 360, 360);
         paintAction = new HashMap<Class<? extends GameFake>, PaintAction>();
         apple = ImageLoader.load("Apple.png");
         empty = ImageLoader.load("Empty.png");

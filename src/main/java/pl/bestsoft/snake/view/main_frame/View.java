@@ -7,7 +7,6 @@ import pl.bestsoft.snake.message.ScoreMessage;
 import pl.bestsoft.snake.view.ClientNetwork;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Buduje GUI gry.
@@ -24,7 +23,7 @@ public class View {
     /**
      * Panel z wynikami graczy.
      */
-    private ScoreFrame scoreFrame;
+    private ScorePanel scoreFrame;
     /**
      * Moduł sieciowy który obsługuje połączenie z serwerem.
      */
@@ -36,13 +35,17 @@ public class View {
 
             @Override
             public void run() {
-                scoreFrame = new ScoreFrame();
+                scoreFrame = new ScorePanel();
                 mainFrame = new MainFrame(clientNetwork);
                 mainBoard = new MainBoard();
 
-                mainFrame.setLayout(new BorderLayout());
-                mainFrame.add(mainBoard, BorderLayout.CENTER);
-                mainFrame.add(scoreFrame, BorderLayout.EAST);
+
+
+
+
+
+                mainFrame.add(mainBoard);
+                mainFrame.add(scoreFrame);
                 mainFrame.setLocationRelativeTo(null);
             }
         });
