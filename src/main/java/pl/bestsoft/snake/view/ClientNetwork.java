@@ -49,7 +49,7 @@ public class ClientNetwork {
             t.start();
 
         } catch (Exception e) {
-            view.showInfoMessage(new InfoMessage("Blad serwera"));
+            view.showInfoMessage(new InfoMessage("Nie mozna polaczyc z serwerem"));
         }
     }
 

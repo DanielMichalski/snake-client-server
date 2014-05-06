@@ -3,6 +3,7 @@ package pl.bestsoft.snake.view.main_frame;
 import pl.bestsoft.snake.fakes.ScoreFake;
 import pl.bestsoft.snake.message.ScoreMessage;
 import pl.bestsoft.snake.model.SnakeNumber;
+import pl.bestsoft.snake.util.Const;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ import java.util.Map;
  * Zawiera panele z informacjami o liczbie zdobytych punktów przez graczy.
  */
 
-class ScoreFrame extends JPanel {
+class ScorePanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     /**
@@ -21,17 +22,16 @@ class ScoreFrame extends JPanel {
      */
     private final Map<SnakeNumber, PlayerScore> players;
 
-    public ScoreFrame() {
-        setSize(40, 100);
-        setPreferredSize(new Dimension(70, 360));
-        setLayout(new GridLayout(5, 1));
-        JLabel lab = new JLabel("Wyniki:");
+    public ScorePanel() {
+        setBounds(50, 440, 360, 70);
+        setLayout(new GridLayout(1, 5));
+        JLabel lab = new JLabel("    Wyniki:");
         add(lab);
         players = new HashMap<SnakeNumber, PlayerScore>();
-        players.put(SnakeNumber.FIRST, new PlayerScore(Color.RED));
-        players.put(SnakeNumber.SECOND, new PlayerScore(Color.GREEN));
-        players.put(SnakeNumber.THIRD, new PlayerScore(Color.YELLOW));
-        players.put(SnakeNumber.FOURTH, new PlayerScore(Color.MAGENTA));
+        players.put(SnakeNumber.FIRST, new PlayerScore(Const.Colors.RED));
+        players.put(SnakeNumber.SECOND, new PlayerScore(Const.Colors.GREEN));
+        players.put(SnakeNumber.THIRD, new PlayerScore(Const.Colors.YELLOW));
+        players.put(SnakeNumber.FOURTH, new PlayerScore(Const.Colors.MAGENTA));
         add(players.get(SnakeNumber.FIRST));
         add(players.get(SnakeNumber.SECOND));
         add(players.get(SnakeNumber.THIRD));
