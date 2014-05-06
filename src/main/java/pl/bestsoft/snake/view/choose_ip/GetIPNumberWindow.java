@@ -59,7 +59,7 @@ public class GetIPNumberWindow extends JFrame {
     }
 
     private JButton createOkBtn() {
-        JButton okBtn = new JButton("Połącz");
+        JButton okBtn = new JButton("Polacz");
         okBtn.setBounds(120, 160, 100, 30);
         okBtn.setFont(Const.Fonts.BTN_FONT);
         okBtn.addActionListener(new OkKeyLinstener());
