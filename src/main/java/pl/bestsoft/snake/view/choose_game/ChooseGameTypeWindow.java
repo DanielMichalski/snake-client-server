@@ -20,7 +20,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Wyświetla okno z moliwością wyboru rodzaju gry.
  */
 public class ChooseGameTypeWindow extends JFrame {
+
     private static final int BUTTON_WIDTH = 275;
+
     private static final int BUTTON_HEIGHT = 78;
 
     /**
@@ -31,7 +33,7 @@ public class ChooseGameTypeWindow extends JFrame {
     /**
      * Tworzy nowe okno wyboru gry.
      */
-    public ChooseGameTypeWindow() {
+    public  ChooseGameTypeWindow() {
         blockingQueue = new LinkedBlockingQueue<GameEvent>();
 
         setupFrame();
@@ -54,7 +56,7 @@ public class ChooseGameTypeWindow extends JFrame {
         String player2Text = TextsDao.getText("ChooseGameTypeWindow.2");
         String player3Text = TextsDao.getText("ChooseGameTypeWindow.3");
         String createServerText = TextsDao.getText("ChooseGameTypeWindow.5");
-        String joinServerText = TextsDao.getText("ChooseGameTypeWindow.4");
+        String joinServerText = TextsDao.getText("ChooseGameTypeWindow.8");
 
         JButton player1 = createBtn("player1.png", 50, 100, player1Text, new NewGamePlayer1Action());
         JButton player2 = createBtn("player2.png", 50, 200, player2Text, new NewGamePlayer2Action());
@@ -133,7 +135,8 @@ public class ChooseGameTypeWindow extends JFrame {
         btn.setForeground(Color.darkGray);
         Icon icon = new ImageIcon(getClass().getResource("/images/" + imageTitle));
         btn.setIcon(icon);
-        btn.setHorizontalAlignment(SwingConstants.LEFT);
+        btn.setHorizontalAlignment(SwingConstants.CENTER);
+        btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         return btn;
     }
 
