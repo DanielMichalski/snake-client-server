@@ -10,8 +10,7 @@ public class Runner {
         EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                ChooseGameTypeWindow frame =
-                        new ChooseGameTypeWindow();
+                ChooseGameTypeWindow frame = new ChooseGameTypeWindow();
                 frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
                 frame.display();
             }

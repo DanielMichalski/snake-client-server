@@ -23,10 +23,9 @@ class ScorePanel extends JPanel {
     private final Map<SnakeNumber, PlayerScore> players;
 
     public ScorePanel() {
-        setBounds(50, 440, 360, 70);
-        setLayout(new GridLayout(1, 5));
-        JLabel lab = new JLabel("    Wyniki:");
-        add(lab);
+        setBounds(430, 80, 70, 300);
+        setLayout(new GridLayout(4, 1));
+        setBorder(BorderFactory.createTitledBorder("Wyniki"));
         players = new HashMap<SnakeNumber, PlayerScore>();
         players.put(SnakeNumber.FIRST, new PlayerScore(Const.Colors.RED));
         players.put(SnakeNumber.SECOND, new PlayerScore(Const.Colors.GREEN));

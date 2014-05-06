@@ -14,5 +14,6 @@ public class Const {
 
     public static interface Fonts {
         Font BTN_FONT = new Font("Arial", Font.PLAIN, 14);
+        Font BTN_FONT_BOLD = new Font("Arial", Font.BOLD, 14);
     }
 }

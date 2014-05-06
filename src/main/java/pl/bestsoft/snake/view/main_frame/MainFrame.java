@@ -8,6 +8,7 @@ import pl.bestsoft.snake.view.ClientNetwork;
 import pl.bestsoft.snake.view.choose_game.ChooseGameTypeWindow;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.event.KeyEvent;
@@ -30,7 +31,7 @@ public class MainFrame extends JFrame {
     }
 
     private void setupFrame() {
-        setSize(465, 550);
+        setSize(520, 550);
         setResizable(false);
         setUndecorated(true);
         addKeyListener(new BoardKeyListener());
@@ -51,7 +52,7 @@ public class MainFrame extends JFrame {
         final JLabel button = new JLabel(imgUn);
         button.addMouseListener(new CloseBtnAction());
         button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        button.setBounds(420, 5, 40, 40);
+        button.setBounds(475, 5, 40, 40);
         return button;
     }
 

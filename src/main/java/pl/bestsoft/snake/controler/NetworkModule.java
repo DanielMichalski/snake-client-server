@@ -31,22 +31,27 @@ class NetworkModule {
      * Kolejka blokująca do której moduł sieciowy wrzuca zdarzenia.
      */
     private final BlockingQueue<GameEvent> blockingQueue;
+
     /**
      * Mapa zawierająca sockety podłączonych klientów.
      */
     private final ConcurrentMap<PlayerID, Socket> sockets = new ConcurrentHashMap<PlayerID, Socket>();
+
     /**
      * Mapa zawierająca objectOutputStreamy podłączonych klientów.
      */
     private final ConcurrentMap<PlayerID, ObjectOutputStream> objectOutputStreams = new ConcurrentHashMap<PlayerID, ObjectOutputStream>();
+
     /**
      * Maksymalna liczba klientów podłączonych do serwera.
      */
     private int numberOfClients;
+
     /**
      * Ostatnio wysłana Fake Mapa.
      */
     private HashMap<FakePoint, GameFake> prevFakeMap = null;
+
     /**
      * Ostatnio wysłana mapa wyników.
      */

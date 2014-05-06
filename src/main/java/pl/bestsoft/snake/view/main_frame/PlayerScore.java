@@ -1,5 +1,7 @@
 package pl.bestsoft.snake.view.main_frame;
 
+import pl.bestsoft.snake.util.Const;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,7 +21,8 @@ class PlayerScore extends JPanel {
         setBackground(color);
         setLayout(null);
         score = new JLabel();
-        score.setBounds(30, 20, 50, 30);
+        score.setFont(Const.Fonts.BTN_FONT_BOLD);
+        score.setBounds(25, 20, 50, 30);
         score.setText("0");
         add(score);
     }
