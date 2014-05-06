@@ -39,11 +39,6 @@ public class View {
                 mainFrame = new MainFrame(clientNetwork);
                 mainBoard = new MainBoard();
 
-
-
-
-
-
                 mainFrame.add(mainBoard);
                 mainFrame.add(scoreFrame);
                 mainFrame.setLocationRelativeTo(null);
