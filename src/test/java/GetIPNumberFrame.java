@@ -1,4 +1,3 @@
-import pl.bestsoft.snake.view.choose_clients.NumberOfClientsFrame;
 import pl.bestsoft.snake.view.choose_ip.GetIPNumberWindow;
 
 import java.awt.*;
