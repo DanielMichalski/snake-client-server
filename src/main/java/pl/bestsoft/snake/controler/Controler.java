@@ -358,7 +358,6 @@ public class Controler {
         @Override
         void perform(final SnakeNumber snakeNumber) {
             model.goSouth(snakeNumber);
-
         }
     }
 
