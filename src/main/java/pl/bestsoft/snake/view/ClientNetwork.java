@@ -1,10 +1,10 @@
 package pl.bestsoft.snake.view;
 
-import pl.bestsoft.snake.events.PlayerEvent;
-import pl.bestsoft.snake.message.BoardMessage;
-import pl.bestsoft.snake.message.GameMessage;
-import pl.bestsoft.snake.message.InfoMessage;
-import pl.bestsoft.snake.message.ScoreMessage;
+import pl.bestsoft.snake.model.events.PlayerEvent;
+import pl.bestsoft.snake.model.messages.BoardMessage;
+import pl.bestsoft.snake.model.messages.GameMessage;
+import pl.bestsoft.snake.model.messages.InfoMessage;
+import pl.bestsoft.snake.model.messages.ScoreMessage;
 import pl.bestsoft.snake.view.main_frame.View;
 
 import java.io.IOException;

@@ -1,9 +1,9 @@
 package pl.bestsoft.snake.view.main_frame;
 
-import pl.bestsoft.snake.message.BoardMessage;
-import pl.bestsoft.snake.message.GameMessage;
-import pl.bestsoft.snake.message.InfoMessage;
-import pl.bestsoft.snake.message.ScoreMessage;
+import pl.bestsoft.snake.model.messages.BoardMessage;
+import pl.bestsoft.snake.model.messages.GameMessage;
+import pl.bestsoft.snake.model.messages.InfoMessage;
+import pl.bestsoft.snake.model.messages.ScoreMessage;
 import pl.bestsoft.snake.view.ClientNetwork;
 
 import javax.swing.*;
@@ -23,7 +23,7 @@ public class View {
     /**
      * Panel z wynikami graczy.
      */
-    private ScorePanel scoreFrame;
+    private ScorePanel scorePanel;
     /**
      * Moduł sieciowy który obsługuje połączenie z serwerem.
      */
@@ -35,12 +35,12 @@ public class View {
 
             @Override
             public void run() {
-                scoreFrame = new ScorePanel();
+                scorePanel = new ScorePanel();
                 mainFrame = new MainFrame(clientNetwork);
                 mainBoard = new MainBoard();
 
                 mainFrame.add(mainBoard);
-                mainFrame.add(scoreFrame);
+                mainFrame.add(scorePanel);
                 mainFrame.setLocationRelativeTo(null);
             }
         });
@@ -53,7 +53,7 @@ public class View {
      */
     public void actScores(final ScoreMessage scoreMessage) {
 
-        scoreFrame.actScore(scoreMessage);
+        scorePanel.actScore(scoreMessage);
     }
 
     /**

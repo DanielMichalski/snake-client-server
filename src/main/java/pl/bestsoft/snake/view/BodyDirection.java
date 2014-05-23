@@ -1,6 +1,6 @@
 package pl.bestsoft.snake.view;
 
-import pl.bestsoft.snake.model.Direction;
+import pl.bestsoft.snake.model.model.Direction;
 
 /**
  * Informacje o kierunku skąd i dokąd przemieszcza się częćć ciała.
