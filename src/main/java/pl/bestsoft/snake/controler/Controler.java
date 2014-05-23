@@ -1,12 +1,12 @@
 package pl.bestsoft.snake.controler;
 
 import pl.bestsoft.snake.dao.TextsDao;
-import pl.bestsoft.snake.events.*;
-import pl.bestsoft.snake.fakes.FakeMap;
-import pl.bestsoft.snake.message.InfoMessage;
-import pl.bestsoft.snake.message.ScoreMessage;
-import pl.bestsoft.snake.model.Model;
-import pl.bestsoft.snake.model.SnakeNumber;
+import pl.bestsoft.snake.model.events.*;
+import pl.bestsoft.snake.model.fakes.FakeMap;
+import pl.bestsoft.snake.model.messages.InfoMessage;
+import pl.bestsoft.snake.model.messages.ScoreMessage;
+import pl.bestsoft.snake.model.model.Model;
+import pl.bestsoft.snake.model.model.SnakeNumber;
 import pl.bestsoft.snake.snake.KeySetID;
 import pl.bestsoft.snake.snake.PlayerID;
 
@@ -64,8 +64,8 @@ public class Controler {
     /**
      * Tworzy nowy obiekt kontrolera.
      *
-     * @param model
-     * @param blockingQueue
+     * @param model model
+     * @param blockingQueue kolejka blokująca
      * @param clients       liczba klientów biorących udział w rozgrywce
      * @param snakes        liczba węży na planszy
      */

@@ -1,8 +1,8 @@
 package pl.bestsoft.snake.controler;
 
 import pl.bestsoft.snake.dao.TextsDao;
-import pl.bestsoft.snake.events.GameEvent;
-import pl.bestsoft.snake.events.TimerEvent;
+import pl.bestsoft.snake.model.events.GameEvent;
+import pl.bestsoft.snake.model.events.TimerEvent;
 
 import java.util.concurrent.BlockingQueue;
 

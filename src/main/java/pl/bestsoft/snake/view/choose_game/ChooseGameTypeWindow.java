@@ -1,10 +1,9 @@
 package pl.bestsoft.snake.view.choose_game;
 
-import javafx.application.Application;
 import pl.bestsoft.snake.controler.Controler;
 import pl.bestsoft.snake.dao.TextsDao;
-import pl.bestsoft.snake.events.GameEvent;
-import pl.bestsoft.snake.model.Model;
+import pl.bestsoft.snake.model.events.GameEvent;
+import pl.bestsoft.snake.model.model.Model;
 import pl.bestsoft.snake.util.Const;
 import pl.bestsoft.snake.util.ImageLoader;
 import pl.bestsoft.snake.view.choose_clients.NumberOfClientsFrame;

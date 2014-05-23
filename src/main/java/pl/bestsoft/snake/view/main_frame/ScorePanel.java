@@ -1,8 +1,8 @@
 package pl.bestsoft.snake.view.main_frame;
 
-import pl.bestsoft.snake.fakes.ScoreFake;
-import pl.bestsoft.snake.message.ScoreMessage;
-import pl.bestsoft.snake.model.SnakeNumber;
+import pl.bestsoft.snake.model.fakes.ScoreFake;
+import pl.bestsoft.snake.model.messages.ScoreMessage;
+import pl.bestsoft.snake.model.model.SnakeNumber;
 import pl.bestsoft.snake.util.Const;
 
 import javax.swing.*;
@@ -23,8 +23,8 @@ class ScorePanel extends JPanel {
     private final Map<SnakeNumber, PlayerScore> players;
 
     public ScorePanel() {
-        setBounds(430, 80, 70, 300);
-        setLayout(new GridLayout(4, 1));
+        setBounds(50, 440, 360, 90);
+        setLayout(new GridLayout(1, 4));
         setBorder(BorderFactory.createTitledBorder("Wyniki"));
         players = new HashMap<SnakeNumber, PlayerScore>();
         players.put(SnakeNumber.FIRST, new PlayerScore(Const.Colors.RED));

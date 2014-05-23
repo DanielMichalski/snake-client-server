@@ -1,8 +1,8 @@
 package pl.bestsoft.snake.view.main_frame;
 
-import pl.bestsoft.snake.fakes.*;
-import pl.bestsoft.snake.model.Direction;
-import pl.bestsoft.snake.model.SnakeNumber;
+import pl.bestsoft.snake.model.fakes.*;
+import pl.bestsoft.snake.model.model.Direction;
+import pl.bestsoft.snake.model.model.SnakeNumber;
 import pl.bestsoft.snake.util.ImageLoader;
 import pl.bestsoft.snake.view.BodyDirection;
 
