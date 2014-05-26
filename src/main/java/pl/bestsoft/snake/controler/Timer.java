@@ -9,7 +9,7 @@ import java.util.concurrent.BlockingQueue;
 /**
  * Timer odlicza czas pomiędzy kolejnymi ruchami węża.
  */
-class Timer implements Runnable {
+public class Timer implements Runnable {
     /**
      * Kolejka blokująca w której timer umieszcza eventy.
      */
@@ -20,7 +20,7 @@ class Timer implements Runnable {
      *
      * @param blockingQueue klejka blokująca zawierająca eventy od gracza
      */
-    Timer(final BlockingQueue<GameEvent> blockingQueue) {
+    public Timer(final BlockingQueue<GameEvent> blockingQueue) {
         this.blockingQueue = blockingQueue;
     }
 

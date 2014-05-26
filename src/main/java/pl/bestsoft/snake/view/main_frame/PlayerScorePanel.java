@@ -1,6 +1,5 @@
 package pl.bestsoft.snake.view.main_frame;
 
-import pl.bestsoft.snake.model.model.SnakeNumber;
 import pl.bestsoft.snake.util.Const;
 
 import javax.swing.*;
@@ -9,7 +8,7 @@ import java.awt.*;
 /**
  * Informacjie o liczbie zdobytych punktów przez gracza.
  */
-class PlayerScore extends JPanel {
+class PlayerScorePanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     /**
@@ -17,7 +16,7 @@ class PlayerScore extends JPanel {
      */
     private final JLabel score;
 
-    PlayerScore(final Color color) {
+    PlayerScorePanel(final Color color) {
         setSize(40, 40);
         setBackground(color);
         setLayout(null);

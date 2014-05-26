@@ -1,11 +1,10 @@
 package pl.bestsoft.snake.view.main_frame;
 
 import pl.bestsoft.snake.model.events.*;
+import pl.bestsoft.snake.network.ClientNetwork;
 import pl.bestsoft.snake.snake.KeySetID;
 import pl.bestsoft.snake.util.Const;
 import pl.bestsoft.snake.util.ImageLoader;
-import pl.bestsoft.snake.view.ClientNetwork;
-import pl.bestsoft.snake.view.choose_game.ChooseGameTypeWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,14 +14,14 @@ import java.awt.event.KeyEvent;
 /**
  * Ramka w której są wyświetlane poszczególne elementy składowe GUI.
  */
-public class MainFrame extends JFrame {
+public class GameFrame extends JFrame {
 
     /**
      * Moduł sieciowy obsługujący poczenie z serwerem.
      */
     private final ClientNetwork clientNetwork;
 
-    public MainFrame(final ClientNetwork clientNetwork) {
+    public GameFrame(final ClientNetwork clientNetwork) {
         this.clientNetwork = clientNetwork;
 
         setupFrame();
@@ -82,10 +81,7 @@ public class MainFrame extends JFrame {
             EventQueue.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    dispose();
-                    ChooseGameTypeWindow frame = new ChooseGameTypeWindow();
-                    frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-                    frame.setVisible(true);
+                    System.exit(0);
                 }
             });
         }

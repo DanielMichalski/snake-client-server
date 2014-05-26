@@ -15,7 +15,7 @@ import java.util.Map;
 /**
  * Plansza gry
  */
-public class MainBoard extends JPanel {
+public class BoardPanel extends JPanel {
 
     private static final long serialVersionUID = 1L;
     /**
@@ -43,13 +43,10 @@ public class MainBoard extends JPanel {
      */
     final private Image startImage;
 
-    private final Class<? extends MainBoard> aClass;
-
     /**
      * Tworzy nowy Main Board.
      */
-    MainBoard() {
-        aClass = this.getClass();
+    BoardPanel() {
         setBounds(50, 50, 360, 360);
         paintAction = new HashMap<Class<? extends GameFake>, PaintAction>();
         apple = ImageLoader.load("Apple.png");

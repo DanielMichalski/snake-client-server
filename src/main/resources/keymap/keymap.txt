@@ -1,0 +1,17 @@
+Gracz 1
+Klawisz lewo - ruch w górę
+Klawisz w dół - ruch w dół
+Klawisz w lewo - ruch w lewo
+Klawisz w prawo - ruch w prawo
+
+Gracz 2
+W - ruch w górę
+S - ruch w dół
+A - ruch w lewo
+D - ruch w prawo
+
+Gracz 3
+H - ruch w górę
+N - ruch w dół
+M - ruch w lewo
+B - ruch w prawo

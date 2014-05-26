@@ -5,7 +5,7 @@ package pl.bestsoft.snake.model.model;
  */
 public enum Direction {
     /**
-     * Wąż porusza się na pónoc
+     * Wąż porusza się na północ
      */
     NORTH(0, -1) {
         @Override

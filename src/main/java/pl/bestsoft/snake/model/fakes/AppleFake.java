@@ -7,5 +7,4 @@ import java.io.Serializable;
  */
 public class AppleFake extends GameFake implements Serializable {
     private static final long serialVersionUID = 1L;
-
 }

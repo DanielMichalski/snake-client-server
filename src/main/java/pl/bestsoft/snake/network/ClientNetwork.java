@@ -1,4 +1,4 @@
-package pl.bestsoft.snake.view;
+package pl.bestsoft.snake.network;
 
 import pl.bestsoft.snake.model.events.PlayerEvent;
 import pl.bestsoft.snake.model.messages.BoardMessage;
@@ -16,7 +16,6 @@ import java.util.HashMap;
 /**
  * Klasa odpowiedzialna za komunikację z serwerem.
  */
-
 public class ClientNetwork {
     /**
      * Widok klienta.
