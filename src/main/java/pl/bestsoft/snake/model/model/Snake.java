@@ -321,7 +321,7 @@ class Snake {
     }
 
     /**
-     * Dodaje część ciaŁa do listy częci ciała węża.
+     * Dodaje część ciała do listy części ciała węża
      *
      * @param alfa        kąt alfa częci ciała
      * @param beta        kąt beta częci ciała

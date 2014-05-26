@@ -6,6 +6,7 @@ import pl.bestsoft.snake.model.events.GameEvent;
 import pl.bestsoft.snake.model.model.Model;
 import pl.bestsoft.snake.util.Const;
 import pl.bestsoft.snake.util.ImageLoader;
+import pl.bestsoft.snake.util.KeymapUtil;
 import pl.bestsoft.snake.view.choose_clients.NumberOfClientsFrame;
 import pl.bestsoft.snake.view.choose_ip.GetIPNumberWindow;
 import pl.bestsoft.snake.view.main_frame.View;
@@ -33,7 +34,7 @@ public class ChooseGameTypeWindow extends JFrame {
     /**
      * Tworzy nowe okno wyboru gry.
      */
-    public  ChooseGameTypeWindow() {
+    public ChooseGameTypeWindow() {
         blockingQueue = new LinkedBlockingQueue<GameEvent>();
 
         setupFrame();
@@ -247,6 +248,7 @@ public class ChooseGameTypeWindow extends JFrame {
 
         @Override
         public void run() {
+            KeymapUtil.showDefaultKeymap();
             Model model = new Model();
             Controler controler = new Controler(model, blockingQueue, 1, howManySnakes);
             View view = new View();

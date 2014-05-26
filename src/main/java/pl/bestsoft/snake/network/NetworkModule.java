@@ -1,5 +1,6 @@
-package pl.bestsoft.snake.controler;
+package pl.bestsoft.snake.network;
 
+import pl.bestsoft.snake.controler.Timer;
 import pl.bestsoft.snake.model.events.EndGameEvent;
 import pl.bestsoft.snake.model.events.GameEvent;
 import pl.bestsoft.snake.model.events.NewGameEvent;
@@ -12,6 +13,7 @@ import pl.bestsoft.snake.model.messages.ScoreMessage;
 import pl.bestsoft.snake.model.model.SnakeNumber;
 import pl.bestsoft.snake.snake.PlayerID;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -26,7 +28,7 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Moduł sieciowy umożliwia komunikację z klientami
  */
-class NetworkModule {
+public class NetworkModule {
     /**
      * Kolejka blokująca do której moduł sieciowy wrzuca zdarzenia.
      */
@@ -62,7 +64,7 @@ class NetworkModule {
      *
      * @param blockingQueue kolejka blokująca do której są wrzucane eventy przez moduł sieciowy.
      */
-    NetworkModule(final BlockingQueue<GameEvent> blockingQueue) {
+    public NetworkModule(final BlockingQueue<GameEvent> blockingQueue) {
         this.blockingQueue = blockingQueue;
     }
 
@@ -71,7 +73,7 @@ class NetworkModule {
      *
      * @param howManyClients liczba klientów podłączonych do serwera.
      */
-    void begin(final int howManyClients) {
+    public void begin(final int howManyClients) {
         Server server = new Server(howManyClients);
         Thread t = new Thread(server);
         t.start();
@@ -82,7 +84,7 @@ class NetworkModule {
      *
      * @param fakeMap nowa fake mapa planszy porównywana jest z mapą wysłaną wcześniej.
      */
-    void sendAllPlayersFakeMap(final FakeMap fakeMap) {
+    public void sendAllPlayersFakeMap(final FakeMap fakeMap) {
         HashMap<FakePoint, GameFake> newFakeMap = fakeMap.getFakeMap();
         if (newFakeMap.isEmpty()) {
             return;
@@ -110,7 +112,7 @@ class NetworkModule {
      *
      * @param gameMessage
      */
-    void sendAllPlayersMessage(final GameMessage gameMessage) {
+    public void sendAllPlayersMessage(final GameMessage gameMessage) {
         for (ObjectOutputStream objectOutputStream : objectOutputStreams.values()) {
             try {
                 objectOutputStream.writeObject(gameMessage);
@@ -143,7 +145,7 @@ class NetworkModule {
      *
      * @param scoreMessage
      */
-    void sendAllPlayersScore(ScoreMessage scoreMessage) {
+    public void sendAllPlayersScore(ScoreMessage scoreMessage) {
         if (prevScoreMap == null) {
             prevScoreMap = scoreMessage.getScoreFakeMap().getScoreMap();
             sendAllPlayersMessage(scoreMessage);
@@ -174,14 +176,14 @@ class NetworkModule {
     /**
      * Informuje o tym czy podłączony jest więcej niż jeden klient
      */
-    boolean isMoreThanOnePlayer() {
+    public boolean isMoreThanOnePlayer() {
         return (getNumberOfClients() > 1);
     }
 
     /**
      * Informuje o tym czy wszyscy klienci są podłączeni do serwera.
      */
-    boolean allPlayersAreConected() {
+    public boolean allPlayersAreConected() {
         return getNumberOfClients() == objectOutputStreams.size();
     }
 
@@ -267,7 +269,6 @@ class NetworkModule {
 
         Server(final int howManyPlayers) {
             setNumberOfClients(howManyPlayers);
-
         }
 
         /**
@@ -278,8 +279,7 @@ class NetworkModule {
             try {
                 serverSocket = new ServerSocket(5555);
             } catch (Exception e) {
-
-                e.printStackTrace();
+                showErrorMessageAndExit();
             }
             for (int i = 1; i <= getNumberOfClients(); ++i) {
                 Socket tmp;
@@ -290,11 +290,8 @@ class NetworkModule {
                     PlayerConected newPlayer = new PlayerConected(new PlayerID(i), tmp);
                     Thread t = new Thread(newPlayer);
                     t.start();
-
                 } catch (IOException e) {
-                    System.out.println("Nie można utworzyć serwera");
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    showErrorMessageAndExit();
                 }
             }
             Thread timer = new Thread(new Timer(blockingQueue));
@@ -304,6 +301,16 @@ class NetworkModule {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+
+        private void showErrorMessageAndExit() {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Nie można utworzyć serwera",
+                    "Błąd",
+                    JOptionPane.ERROR_MESSAGE
+            );
+            System.exit(-1);
         }
     }
 }

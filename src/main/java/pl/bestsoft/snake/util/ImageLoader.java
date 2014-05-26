@@ -5,13 +5,8 @@ import java.awt.*;
 import java.net.URL;
 
 public class ImageLoader {
-    private static Class<? extends ImageLoader> aClass;
-
-    static {
-        aClass = ImageLoader.class;
-    }
-
     public static Image load(String imageTitle) {
+        Class<ImageLoader> aClass = ImageLoader.class;
         URL resource = aClass.getResource("/images/" + imageTitle);
         return new ImageIcon(resource).getImage();
     }

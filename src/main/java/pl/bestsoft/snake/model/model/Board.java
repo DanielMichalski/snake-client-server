@@ -41,7 +41,12 @@ class Board {
     void checkCollision() {
         for (SnakeNumber snakeNumber : SnakeNumber.values()) {
             for (SnakeNumber secondSnakeNumber : SnakeNumber.values()) {
-                if (snake.containsKey(snakeNumber) && snake.containsKey(secondSnakeNumber) && secondSnakeNumber.getNumber() != snakeNumber.getNumber() && snake.get(snakeNumber).snakeIsAlive() && snake.get(secondSnakeNumber).snakeIsAlive()) {
+                if (snake.containsKey(snakeNumber)
+                        && snake.containsKey(secondSnakeNumber)
+                        && secondSnakeNumber.getNumber() != snakeNumber.getNumber()
+                        && snake.get(snakeNumber).snakeIsAlive()
+                        && snake.get(secondSnakeNumber).snakeIsAlive()) {
+
                     snake.get(secondSnakeNumber).isCollisionBetweenSnakes((snake.get(snakeNumber)), emptyPoints);
                 }
             }
@@ -56,7 +61,13 @@ class Board {
 
         for (SnakeNumber snakeNumber : SnakeNumber.values()) {
             for (SnakeNumber secondSnakeNumber : SnakeNumber.values()) {
-                if (snake.containsKey(snakeNumber) && snake.containsKey(secondSnakeNumber) && secondSnakeNumber != snakeNumber && snake.get(snakeNumber).snakeIsAlive() && snake.get(secondSnakeNumber).snakeIsAlive() && snake.get(snakeNumber).getFirst().equals(snake.get(secondSnakeNumber).getFirst()) && snake.get(snakeNumber).getDirection() == snake.get(secondSnakeNumber).getDirection().turnBack()) {
+                if (snake.containsKey(snakeNumber) && snake.containsKey(secondSnakeNumber)
+                        && secondSnakeNumber != snakeNumber
+                        && snake.get(snakeNumber).snakeIsAlive()
+                        && snake.get(secondSnakeNumber).snakeIsAlive()
+                        && snake.get(snakeNumber).getFirst().equals(snake.get(secondSnakeNumber).getFirst())
+                        && snake.get(snakeNumber).getDirection() == snake.get(secondSnakeNumber).getDirection().turnBack()) {
+
                     snake.get(snakeNumber).killSnake();
                     snake.get(secondSnakeNumber).killSnake();
                 }
@@ -71,7 +82,11 @@ class Board {
 
         for (SnakeNumber snakeNumber : SnakeNumber.values()) {
             for (SnakeNumber secondSnakeNumber : SnakeNumber.values()) {
-                if (snake.containsKey(snakeNumber) && snake.containsKey(secondSnakeNumber) && secondSnakeNumber != snakeNumber && snake.get(snakeNumber).snakeIsAlive() && snake.get(secondSnakeNumber).snakeIsAlive() && snake.get(snakeNumber).getFirst().equals(snake.get(secondSnakeNumber).getFirst())) {
+                if (snake.containsKey(snakeNumber) && snake.containsKey(secondSnakeNumber)
+                        && secondSnakeNumber != snakeNumber
+                        && snake.get(snakeNumber).snakeIsAlive()
+                        && snake.get(secondSnakeNumber).snakeIsAlive()
+                        && snake.get(snakeNumber).getFirst().equals(snake.get(secondSnakeNumber).getFirst())) {
                     snake.get(snakeNumber).killSnake();
                     snake.get(secondSnakeNumber).killSnake();
                 }
@@ -94,7 +109,6 @@ class Board {
         for (int alfa = 0; alfa < 360; alfa += Snake.getAngle()) {
             for (int beta = 0; beta < 360; beta += Snake.getAngle()) {
                 emptyPoints.add(new EmptyPoint(new Coordinates(alfa, beta)));
-
             }
         }
     }
@@ -104,13 +118,8 @@ class Board {
      * o tym nie wie
      */
     boolean gameIsEnd() {
-        if (!gameStatus.inGame()) {
-            return true;
-        }
-        return false;
-
+        return !gameStatus.inGame();
     }
-
 
     /**
      * Zwraca mape całej planszy

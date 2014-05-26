@@ -4,7 +4,7 @@ import pl.bestsoft.snake.model.messages.BoardMessage;
 import pl.bestsoft.snake.model.messages.GameMessage;
 import pl.bestsoft.snake.model.messages.InfoMessage;
 import pl.bestsoft.snake.model.messages.ScoreMessage;
-import pl.bestsoft.snake.view.ClientNetwork;
+import pl.bestsoft.snake.network.ClientNetwork;
 
 import javax.swing.*;
 
@@ -15,11 +15,11 @@ public class View {
     /**
      * Ramka w któórej się umieszczane elementy.
      */
-    private MainFrame mainFrame;
+    private GameFrame mainFrame;
     /**
      * Główna plansza na której pełzają węże.
      */
-    private MainBoard mainBoard;
+    private BoardPanel mainBoard;
     /**
      * Panel z wynikami graczy.
      */
@@ -36,8 +36,8 @@ public class View {
             @Override
             public void run() {
                 scorePanel = new ScorePanel();
-                mainFrame = new MainFrame(clientNetwork);
-                mainBoard = new MainBoard();
+                mainFrame = new GameFrame(clientNetwork);
+                mainBoard = new BoardPanel();
 
                 mainFrame.add(mainBoard);
                 mainFrame.add(scorePanel);

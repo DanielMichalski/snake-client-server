@@ -20,17 +20,17 @@ class ScorePanel extends JPanel {
     /**
      * Lista paneli z wynikami graczy
      */
-    private final Map<SnakeNumber, PlayerScore> players;
+    private final Map<SnakeNumber, PlayerScorePanel> players;
 
     public ScorePanel() {
         setBounds(50, 440, 360, 90);
         setLayout(new GridLayout(1, 4));
         setBorder(BorderFactory.createTitledBorder("Wyniki"));
-        players = new HashMap<SnakeNumber, PlayerScore>();
-        players.put(SnakeNumber.FIRST, new PlayerScore(Const.Colors.RED));
-        players.put(SnakeNumber.SECOND, new PlayerScore(Const.Colors.GREEN));
-        players.put(SnakeNumber.THIRD, new PlayerScore(Const.Colors.YELLOW));
-        players.put(SnakeNumber.FOURTH, new PlayerScore(Const.Colors.MAGENTA));
+        players = new HashMap<SnakeNumber, PlayerScorePanel>();
+        players.put(SnakeNumber.FIRST, new PlayerScorePanel(Const.Colors.RED));
+        players.put(SnakeNumber.SECOND, new PlayerScorePanel(Const.Colors.GREEN));
+        players.put(SnakeNumber.THIRD, new PlayerScorePanel(Const.Colors.YELLOW));
+        players.put(SnakeNumber.FOURTH, new PlayerScorePanel(Const.Colors.MAGENTA));
         add(players.get(SnakeNumber.FIRST));
         add(players.get(SnakeNumber.SECOND));
         add(players.get(SnakeNumber.THIRD));
