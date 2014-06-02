@@ -35,7 +35,6 @@ public class GameFrame extends JFrame {
         addKeyListener(new BoardKeyListener());
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLayout(null);
-        setUndecorated(true);
         getContentPane().setBackground(Const.Colors.BACKGROUND_COLOR);
         setWindowMoveble();
     }

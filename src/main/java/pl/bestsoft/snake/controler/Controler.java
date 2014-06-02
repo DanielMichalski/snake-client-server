@@ -30,10 +30,6 @@ public class Controler {
      */
     private final BlockingQueue<GameEvent> blockingQueue;
     /**
-     * Maksymalna liczba klientów.
-     */
-    private final int howManyClients;
-    /**
      * Liczba węży w grze.
      */
     private final int snakes;
@@ -48,11 +44,11 @@ public class Controler {
     /**
      * Mapa akcji dotyczących zmiany kierunku węża
      */
-    private final Map<Class<? extends PlayerEvent>, TurningAction> turningAction;
+    private final Map<Class<? extends PlayerEvent>, TurningAction> turningActions;
     /**
      * Mapa zawierająca listy akcji dotyczących konkretnego węża
      */
-    private final Map<SnakeNumber, LinkedList<GameEvent>> playerEvent;
+    private final Map<SnakeNumber, LinkedList<GameEvent>> playerEvents;
     /**
      * Mapa zawierająca odwzorowania setów klawiszy na węże którymi sterują
      */
@@ -65,20 +61,19 @@ public class Controler {
     /**
      * Tworzy nowy obiekt kontrolera.
      *
-     * @param model         model
-     * @param blockingQueue kolejka blokująca
-     * @param clients       liczba klientów biorących udział w rozgrywce
-     * @param snakes        liczba węży na planszy
+     * @param model          model
+     * @param blockingQueue  kolejka blokująca
+     * @param howManyClients liczba klientów biorących udział w rozgrywce
+     * @param snakes         liczba węży na planszy
      */
-    public Controler(final Model model, final BlockingQueue<GameEvent> blockingQueue, final int clients, final int snakes) {
+    public Controler(final Model model, final BlockingQueue<GameEvent> blockingQueue, final int howManyClients, final int snakes) {
         this.model = model;
         this.blockingQueue = blockingQueue;
-        this.howManyClients = clients;
         this.snakes = snakes;
         this.networkModule = new NetworkModule(blockingQueue);
         actions = fillActions();
-        turningAction = fillTurning();
-        playerEvent = fillPlayerEvent();
+        turningActions = fillTurning();
+        playerEvents = fillPlayerEvent();
         keySetIDMap = fillKeySetIDMap();
         playerIDMap = fillPlayerIDMap();
         networkModule.begin(howManyClients);
@@ -132,7 +127,7 @@ public class Controler {
      * Dla każdego węża tworzona jest osobna kolejka w której są przechowywane
      * informacje o naciśnięciach klawiszy pomiędzy przerwaniami zegara.
      *
-     * @return playerEvent
+     * @return playerEvents
      */
     private Map<SnakeNumber, LinkedList<GameEvent>> fillPlayerEvent() {
         Map<SnakeNumber, LinkedList<GameEvent>> playerEvent = new HashMap<SnakeNumber, LinkedList<GameEvent>>();
@@ -163,7 +158,7 @@ public class Controler {
     /**
      * Wypełnia mape akcji związanych ze zmianą kierunku węża.
      *
-     * @return turningAction
+     * @return turningActions
      */
     private Map<Class<? extends PlayerEvent>, TurningAction> fillTurning() {
         Map<Class<? extends PlayerEvent>, TurningAction> turningAction = new HashMap<Class<? extends PlayerEvent>, TurningAction>();
@@ -224,7 +219,7 @@ public class Controler {
             if (networkModule.isMoreThanOnePlayer() && (!networkModule.allPlayersAreConected())) {
                 return;
             }
-            for (LinkedList<GameEvent> liknedList : playerEvent.values()) {
+            for (LinkedList<GameEvent> liknedList : playerEvents.values()) {
                 liknedList.clear();
             }
             model.startGame(snakes);
@@ -240,11 +235,11 @@ public class Controler {
             if (networkModule.isMoreThanOnePlayer()) {
                 PressDownKeyEvent pressDownKeyEvent = (PressDownKeyEvent) gameEvent;
                 if (pressDownKeyEvent.isBasicSet()) {
-                    playerEvent.get(playerIDMap.get(pressDownKeyEvent.getID())).addLast(pressDownKeyEvent);
+                    playerEvents.get(playerIDMap.get(pressDownKeyEvent.getID())).addLast(pressDownKeyEvent);
                 }
             } else {
                 PressDownKeyEvent pressDownKeyEvent = (PressDownKeyEvent) gameEvent;
-                playerEvent.get(keySetIDMap.get(pressDownKeyEvent.getWhichSetKeys())).addLast(pressDownKeyEvent);
+                playerEvents.get(keySetIDMap.get(pressDownKeyEvent.getWhichSetKeys())).addLast(pressDownKeyEvent);
             }
         }
     }
@@ -258,11 +253,11 @@ public class Controler {
             if (networkModule.isMoreThanOnePlayer()) {
                 PressLeftKeyEvent pressLeftKeyEvent = (PressLeftKeyEvent) gameEvent;
                 if (pressLeftKeyEvent.isBasicSet()) {
-                    playerEvent.get(playerIDMap.get(pressLeftKeyEvent.getID())).addLast(pressLeftKeyEvent);
+                    playerEvents.get(playerIDMap.get(pressLeftKeyEvent.getID())).addLast(pressLeftKeyEvent);
                 }
             } else {
                 PressLeftKeyEvent pressLeftKeyEvent = (PressLeftKeyEvent) gameEvent;
-                playerEvent.get(keySetIDMap.get(pressLeftKeyEvent.getWhichSetKeys())).addLast(pressLeftKeyEvent);
+                playerEvents.get(keySetIDMap.get(pressLeftKeyEvent.getWhichSetKeys())).addLast(pressLeftKeyEvent);
             }
         }
     }
@@ -276,11 +271,11 @@ public class Controler {
             if (networkModule.isMoreThanOnePlayer()) {
                 PressRightKeyEvent pressRightKeyEvent = (PressRightKeyEvent) gameEvent;
                 if (pressRightKeyEvent.isBasicSet()) {
-                    playerEvent.get(playerIDMap.get(pressRightKeyEvent.getID())).addLast(pressRightKeyEvent);
+                    playerEvents.get(playerIDMap.get(pressRightKeyEvent.getID())).addLast(pressRightKeyEvent);
                 }
             } else {
                 PressRightKeyEvent pressRightKeyEvent = (PressRightKeyEvent) gameEvent;
-                playerEvent.get(keySetIDMap.get(pressRightKeyEvent.getWhichSetKeys())).addLast(pressRightKeyEvent);
+                playerEvents.get(keySetIDMap.get(pressRightKeyEvent.getWhichSetKeys())).addLast(pressRightKeyEvent);
             }
         }
     }
@@ -294,11 +289,11 @@ public class Controler {
             if (networkModule.isMoreThanOnePlayer()) {
                 PressUpKeyEvent pressUpKeyEvent = (PressUpKeyEvent) gameEvent;
                 if (pressUpKeyEvent.isBasicSet()) {
-                    playerEvent.get(playerIDMap.get(pressUpKeyEvent.getID())).addLast(pressUpKeyEvent);
+                    playerEvents.get(playerIDMap.get(pressUpKeyEvent.getID())).addLast(pressUpKeyEvent);
                 }
             } else {
                 PressUpKeyEvent pressUpKeyEvent = (PressUpKeyEvent) gameEvent;
-                playerEvent.get(keySetIDMap.get(pressUpKeyEvent.getWhichSetKeys())).addLast(pressUpKeyEvent);
+                playerEvents.get(keySetIDMap.get(pressUpKeyEvent.getWhichSetKeys())).addLast(pressUpKeyEvent);
             }
         }
     }
@@ -312,10 +307,10 @@ public class Controler {
             if (!model.inGame()) {
                 return;
             }
-            for (SnakeNumber snakeNumber : playerEvent.keySet()) {
-                if (!(playerEvent.get(snakeNumber).isEmpty())) {
-                    turningAction.get(playerEvent.get(snakeNumber).getFirst().getClass()).perform(snakeNumber);
-                    playerEvent.get(snakeNumber).clear();
+            for (SnakeNumber snakeNumber : playerEvents.keySet()) {
+                if (!(playerEvents.get(snakeNumber).isEmpty())) {
+                    turningActions.get(playerEvents.get(snakeNumber).getFirst().getClass()).perform(snakeNumber);
+                    playerEvents.get(snakeNumber).clear();
                 }
             }
             model.moveSnakes();
