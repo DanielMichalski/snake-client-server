@@ -1,6 +1,7 @@
 package pl.bestsoft.snake.view.choose_ip;
 
-import pl.bestsoft.snake.dao.TextsDao;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import pl.bestsoft.snake.util.Const;
 import pl.bestsoft.snake.util.ImageLoader;
 import pl.bestsoft.snake.view.choose_game.ChooseGameTypeWindow;
@@ -13,23 +14,27 @@ import java.awt.event.*;
 /**
  * Okienko które umożliwia podanie IP serwera.
  */
+@Component
 public class GetIPNumberWindow extends JFrame {
-    private static final long serialVersionUID = 1L;
+
     /**
      * Pole w którym można podać numer IP serwera.
      */
     private JTextField ipNumberField;
 
+    @Value("${GetIPNumberWindow.0}")
+    private String frameTitle;
+
     /**
      * Tworzy nowe okno do wpisania numeru IP serwera.
      */
-    public GetIPNumberWindow() {
+    public void init() {
         setupFrame();
         initializeComponents();
     }
 
     private void setupFrame() {
-        setTitle(TextsDao.getText("GetIPNumberWindow.0"));
+        setTitle(frameTitle);
         setSize(340, 200);
         setLayout(null);
         setLocationRelativeTo(null);

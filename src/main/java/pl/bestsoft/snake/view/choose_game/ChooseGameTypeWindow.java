@@ -1,9 +1,14 @@
 package pl.bestsoft.snake.view.choose_game;
 
+import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 import pl.bestsoft.snake.controler.Controler;
-import pl.bestsoft.snake.dao.TextsDao;
+import pl.bestsoft.snake.log.AutowiredLogger;
 import pl.bestsoft.snake.model.events.GameEvent;
 import pl.bestsoft.snake.model.model.Model;
+import pl.bestsoft.snake.spring.ContextProvider;
 import pl.bestsoft.snake.util.Const;
 import pl.bestsoft.snake.util.ImageLoader;
 import pl.bestsoft.snake.util.KeymapUtil;
@@ -20,21 +25,46 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Wyświetla okno z moliwością wyboru rodzaju gry.
  */
+@Component
 public class ChooseGameTypeWindow extends JFrame {
+
+    @AutowiredLogger
+    private Logger logger;
 
     private static final int BUTTON_WIDTH = 275;
 
     private static final int BUTTON_HEIGHT = 78;
 
+    @Value("${ChooseGameTypeWindow.0}")
+    private String frameTitle;
+
+    @Value("${ChooseGameTypeWindow.1}")
+    private String player1Text;
+
+    @Value("${ChooseGameTypeWindow.2}")
+    private String player2Text;
+
+    @Value("${ChooseGameTypeWindow.3}")
+    private String player3Text;
+
+    @Value("${ChooseGameTypeWindow.5}")
+    private String createServerText;
+
+    @Value("${ChooseGameTypeWindow.8}")
+    private String joinServerText;
+
+    @Value("${ChooseGameTypeWindow.7}")
+    private String defaultIpNumber;
+
     /**
      * Kolejka blokująca eventy
      */
-    private final LinkedBlockingQueue<GameEvent> blockingQueue;
+    private LinkedBlockingQueue<GameEvent> blockingQueue;
 
     /**
      * Tworzy nowe okno wyboru gry.
      */
-    public ChooseGameTypeWindow() {
+    public void init() {
         blockingQueue = new LinkedBlockingQueue<GameEvent>();
 
         setupFrame();
@@ -42,7 +72,7 @@ public class ChooseGameTypeWindow extends JFrame {
     }
 
     private void setupFrame() {
-        setTitle(TextsDao.getText("ChooseGameTypeWindow.0"));
+        setTitle(frameTitle);
         setSize(700, 410);
         setResizable(false);
         setLayout(null);
@@ -50,15 +80,10 @@ public class ChooseGameTypeWindow extends JFrame {
         getContentPane().setBackground(Const.Colors.BACKGROUND_COLOR);
         setUndecorated(true);
         setWindowRemoveble();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     private void initializeComponents() {
-        String player1Text = TextsDao.getText("ChooseGameTypeWindow.1");
-        String player2Text = TextsDao.getText("ChooseGameTypeWindow.2");
-        String player3Text = TextsDao.getText("ChooseGameTypeWindow.3");
-        String createServerText = TextsDao.getText("ChooseGameTypeWindow.5");
-        String joinServerText = TextsDao.getText("ChooseGameTypeWindow.8");
-
         JButton player1 = createBtn("player1.png", 50, 100, player1Text, new NewGamePlayer1Action());
         JButton player2 = createBtn("player2.png", 50, 200, player2Text, new NewGamePlayer2Action());
         JButton player3 = createBtn("player3.png", 50, 300, player3Text, new NewGamePlayer3Action());
@@ -171,10 +196,11 @@ public class ChooseGameTypeWindow extends JFrame {
     private class JoinGame implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
-            GetIPNumberWindow getIPNumberWindow = new GetIPNumberWindow();
+            ApplicationContext context = ContextProvider.getSpringContext();
+            GetIPNumberWindow frame = context.getBean("getIPNumberWindow", GetIPNumberWindow.class);
             hideWindow();
-            getIPNumberWindow.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-            getIPNumberWindow.display();
+            frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            frame.display();
         }
     }
 
@@ -184,8 +210,11 @@ public class ChooseGameTypeWindow extends JFrame {
     private class MakeServer implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
-            NumberOfClientsFrame chooseNumberOfClientsWindow = new NumberOfClientsFrame(blockingQueue);
-            chooseNumberOfClientsWindow.display();
+            ApplicationContext springContext = ContextProvider.getSpringContext();
+            NumberOfClientsFrame frame =
+                    springContext.getBean("numberOfClientsFrame", NumberOfClientsFrame.class);
+            frame.setBlockingQueue(blockingQueue);
+            frame.display();
             hideWindow();
         }
     }
@@ -252,7 +281,7 @@ public class ChooseGameTypeWindow extends JFrame {
             Model model = new Model();
             Controler controler = new Controler(model, blockingQueue, 1, howManySnakes);
             View view = new View();
-            view.display(TextsDao.getText("ChooseGameTypeWindow.7"));
+            view.display(defaultIpNumber);
             controler.begin();
         }
     }

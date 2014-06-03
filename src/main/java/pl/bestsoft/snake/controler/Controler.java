@@ -1,6 +1,7 @@
 package pl.bestsoft.snake.controler;
 
-import pl.bestsoft.snake.dao.TextsDao;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Controller;
 import pl.bestsoft.snake.model.events.*;
 import pl.bestsoft.snake.model.fakes.FakeMap;
 import pl.bestsoft.snake.model.messages.InfoMessage;
@@ -20,6 +21,7 @@ import java.util.concurrent.BlockingQueue;
 /**
  * Kontroler gry.
  */
+@Controller
 public class Controler {
     /**
      * Model któreg metody wywołuje kontroler.
@@ -58,6 +60,12 @@ public class Controler {
      */
     private final Map<PlayerID, SnakeNumber> playerIDMap;
 
+    @Value("${Controler.3}")
+    private String errorText;
+
+    @Value("$Controler.2}")
+    private String endGameText;
+
     /**
      * Tworzy nowy obiekt kontrolera.
      *
@@ -88,7 +96,7 @@ public class Controler {
                 GameEvent gameEvent = blockingQueue.take();
                 actions.get(gameEvent.getClass()).perform(gameEvent);
             } catch (Exception e) {
-                System.out.println(TextsDao.getText("Controler.3"));
+                System.out.println(errorText);
                 e.printStackTrace();
             }
         }
@@ -174,7 +182,7 @@ public class Controler {
      */
     private void sendEndInformation() {
         if (!model.inGame()) {
-            networkModule.sendAllPlayersMessage(new InfoMessage(TextsDao.getText("Controler.2")));
+            networkModule.sendAllPlayersMessage(new InfoMessage(endGameText));
         }
     }
 

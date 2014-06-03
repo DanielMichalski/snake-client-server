@@ -1,7 +1,8 @@
 package pl.bestsoft.snake.view.choose_clients;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import pl.bestsoft.snake.controler.Controler;
-import pl.bestsoft.snake.dao.TextsDao;
 import pl.bestsoft.snake.model.events.GameEvent;
 import pl.bestsoft.snake.model.model.Model;
 import pl.bestsoft.snake.util.Const;
@@ -17,26 +18,40 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Okno umożliwiające wybór iloóci graczy na serwerze.
  */
+@Component
 public class NumberOfClientsFrame extends JFrame {
 
     private static final int BUTTON_WIDTH = 275;
 
     private static final int BUTTON_HEIGHT = 78;
 
+    @Value("${ChooseGameTypeWindow.0}")
+    private String frameTitle;
+
+    @Value("${ChooseGameTypeWindow.2}")
+    private String player2Text;
+
+    @Value("${ChooseGameTypeWindow.3}")
+    private String player3Text;
+
+    @Value("${ChooseGameTypeWindow.4}")
+    private String player4Text;
+
+    @Value("${ChooseNumberOfClientsWindow.5}")
+    private String defaultIPNumber;
+
     /**
      * Tworzy okno do wyboru ilości graczy.
      */
-    private final LinkedBlockingQueue<GameEvent> blockingQueue;
+    private LinkedBlockingQueue<GameEvent> blockingQueue;
 
-    public NumberOfClientsFrame(final LinkedBlockingQueue<GameEvent> blockingQueue) {
-        this.blockingQueue = blockingQueue;
-
+    public void init() {
         setupFrame();
         initializeComponents();
     }
 
     private void setupFrame() {
-        setTitle(TextsDao.getText("ChooseNumberOfClientsWindow.0"));
+        setTitle(frameTitle);
         setSize(340, 380);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout(null);
@@ -48,10 +63,6 @@ public class NumberOfClientsFrame extends JFrame {
     }
 
     private void initializeComponents() {
-        String player2Text = TextsDao.getText("ChooseGameTypeWindow.2");
-        String player3Text = TextsDao.getText("ChooseGameTypeWindow.3");
-        String player4Text = TextsDao.getText("ChooseGameTypeWindow.4");
-
         JButton player2 = createBtn("player2.png", 30, 70, player2Text, new TwoClientsAction());
         JButton player3 = createBtn("player3.png", 30, 170, player3Text, new ThreeClientsAction());
         JButton player4 = createBtn("player3.png", 30, 270, player4Text, new FourClientsAction());
@@ -143,6 +154,10 @@ public class NumberOfClientsFrame extends JFrame {
         });
     }
 
+    public void setBlockingQueue(LinkedBlockingQueue<GameEvent> blockingQueue) {
+        this.blockingQueue = blockingQueue;
+    }
+
     /**
      * Listener przycisku dla dwóch graczy.
      */
@@ -214,7 +229,7 @@ public class NumberOfClientsFrame extends JFrame {
             Model model = new Model();
             Controler controler = new Controler(model, blockingQueue, howManyClients, howManyClients);
             View view = new View();
-            view.display(TextsDao.getText("ChooseNumberOfClientsWindow.5"));
+            view.display(defaultIPNumber);
             controler.begin();
         }
     }
