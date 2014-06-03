@@ -84,6 +84,7 @@ public class View {
             public void run() {
                 JOptionPane.showMessageDialog(mainFrame,
                         infoMessage.getMessage());
+                System.exit(0);
             }
         });
     }
