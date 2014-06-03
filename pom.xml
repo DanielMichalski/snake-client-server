@@ -8,6 +8,20 @@
     <artifactId>snake</artifactId>
     <version>1.0</version>
 
+    <properties>
+        <spring.version>4.0.5.RELEASE</spring.version>
+    </properties>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+    </dependencies>
+
     <!-- jar file building -->
     <build>
         <plugins>
