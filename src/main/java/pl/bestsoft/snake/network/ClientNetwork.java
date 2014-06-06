@@ -5,8 +5,10 @@ import pl.bestsoft.snake.model.messages.BoardMessage;
 import pl.bestsoft.snake.model.messages.GameMessage;
 import pl.bestsoft.snake.model.messages.InfoMessage;
 import pl.bestsoft.snake.model.messages.ScoreMessage;
+import pl.bestsoft.snake.rmi.client.RmiClientConnection;
 import pl.bestsoft.snake.view.main_frame.View;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -40,6 +42,15 @@ public class ClientNetwork {
      * @param IpNumber numer IP serwera
      */
     public void conectToServer(final String IpNumber) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (!RmiClientConnection.isConnectionToServer()) {
+            JOptionPane.showMessageDialog(null, "RMI zgłasza błąd podłączenia do serwera");
+        }
+
         try {
             clientSocket = new Socket(IpNumber, 5555);
             objectOutputStream = new ObjectOutputStream(
