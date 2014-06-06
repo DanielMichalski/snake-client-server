@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="coolServiceClient"
+          class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+        <property name="serviceInterface" value="pl.bestsoft.snake.rmi.common.IRmiServerConnection"/>
+        <property name="serviceUrl" value="rmi://127.0.0.1:1096/serverConnection"/>
+    </bean>
+
+    <bean id="clientConnection" class="pl.bestsoft.snake.rmi.client.RmiClientConnection">
+        <property name="service" ref="coolServiceClient"/>
+    </bean>
+
+</beans>

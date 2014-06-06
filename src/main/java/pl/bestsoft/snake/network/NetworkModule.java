@@ -11,6 +11,7 @@ import pl.bestsoft.snake.model.messages.GameMessage;
 import pl.bestsoft.snake.model.messages.InfoMessage;
 import pl.bestsoft.snake.model.messages.ScoreMessage;
 import pl.bestsoft.snake.model.model.SnakeNumber;
+import pl.bestsoft.snake.rmi.server.RmiServerConnection;
 import pl.bestsoft.snake.snake.PlayerID;
 
 import javax.swing.*;
@@ -276,6 +277,7 @@ public class NetworkModule {
          */
         @Override
         public void run() {
+            RmiServerConnection.startRmiServer();
             try {
                 serverSocket = new ServerSocket(5555);
             } catch (Exception e) {
