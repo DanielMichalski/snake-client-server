@@ -17,7 +17,7 @@ public class Timer implements Runnable {
      */
     private final BlockingQueue<GameEvent> blockingQueue;
 
-    @Value("${Timer.0}")
+    @Value("${Timer.exception}")
     private String timerErrorText;
 
     /**

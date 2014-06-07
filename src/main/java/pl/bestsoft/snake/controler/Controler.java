@@ -60,7 +60,7 @@ public class Controler {
      */
     private final Map<PlayerID, SnakeNumber> playerIDMap;
 
-    @Value("${Controler.3}")
+    @Value("${Controler.blockingException}")
     private String errorText;
 
     @Value("$Controler.2}")

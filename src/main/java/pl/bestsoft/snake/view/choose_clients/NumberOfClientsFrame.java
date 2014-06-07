@@ -25,19 +25,19 @@ public class NumberOfClientsFrame extends JFrame {
 
     private static final int BUTTON_HEIGHT = 78;
 
-    @Value("${ChooseGameTypeWindow.0}")
+    @Value("${ChooseGameTypeWindow.gameType}")
     private String frameTitle;
 
-    @Value("${ChooseGameTypeWindow.2}")
+    @Value("${ChooseGameTypeWindow.TwoPlayers}")
     private String player2Text;
 
-    @Value("${ChooseGameTypeWindow.3}")
+    @Value("${ChooseGameTypeWindow.ThreePlayers}")
     private String player3Text;
 
-    @Value("${ChooseGameTypeWindow.4}")
+    @Value("${ChooseGameTypeWindow.FourPlayers}")
     private String player4Text;
 
-    @Value("${ChooseNumberOfClientsWindow.5}")
+    @Value("${ChooseNumberOfClientsWindow.DefaultIP}")
     private String defaultIPNumber;
 
     /**

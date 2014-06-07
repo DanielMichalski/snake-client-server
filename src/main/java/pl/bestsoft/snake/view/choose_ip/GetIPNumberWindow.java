@@ -22,7 +22,7 @@ public class GetIPNumberWindow extends JFrame {
      */
     private JTextField ipNumberField;
 
-    @Value("${GetIPNumberWindow.0}")
+    @Value("${GetIPNumberWindow.GetIP}")
     private String frameTitle;
 
     /**
