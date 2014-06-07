@@ -176,7 +176,7 @@ public class GetIPNumberWindow extends JFrame {
 
         @Override
         public void run() {
-            View view = new View();
+            View view = new View(false);
             view.display(ipNumber);
         }
     }

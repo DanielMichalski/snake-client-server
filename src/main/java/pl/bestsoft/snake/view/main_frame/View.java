@@ -29,8 +29,14 @@ public class View {
      */
     private final ClientNetwork clientNetwork;
 
-    public View() {
+    /**
+     * Mówi nam czy rozgrywka jest rozgrywana na lokalnej maszynie czy nie
+     */
+    private final boolean isLocal;
+
+    public View(boolean isLocal) {
         clientNetwork = new ClientNetwork(this);
+        this.isLocal = isLocal;
         SwingUtilities.invokeLater(new Runnable() {
 
             @Override
@@ -69,7 +75,7 @@ public class View {
                 mainFrame.setVisible(true);
             }
         });
-        clientNetwork.conectToServer(IPNumber);
+        clientNetwork.conectToServer(IPNumber, isLocal);
     }
 
     /**

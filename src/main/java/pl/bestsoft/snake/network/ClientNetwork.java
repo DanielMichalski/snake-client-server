@@ -40,16 +40,14 @@ public class ClientNetwork {
      * Nawiązanie połączenia z serwerem.
      *
      * @param IpNumber numer IP serwera
+     * @param isLocal  czy połączenie jest lokalne
      */
-    public void conectToServer(final String IpNumber) {
+    public void conectToServer(final String IpNumber, boolean isLocal) {
         try {
             Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if (!RmiClientConnection.isConnectionToServer()) {
-            JOptionPane.showMessageDialog(null, "RMI zgłasza błąd podłączenia do serwera");
-        }
+        } catch (InterruptedException ignored) {}
+
+        if (!checkRMIConnection(isLocal)) return;
 
         try {
             clientSocket = new Socket(IpNumber, 5555);
@@ -61,6 +59,16 @@ public class ClientNetwork {
         } catch (Exception e) {
             view.showInfoMessage(new InfoMessage("Nie mozna polaczyc z serwerem"));
         }
+    }
+
+    private boolean checkRMIConnection(boolean isLocal) {
+        if (isLocal) {
+            if (!RmiClientConnection.isConnectionToServer()) {
+                JOptionPane.showMessageDialog(null, "RMI zgłasza błąd podłączenia do serwera");
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
