@@ -63,7 +63,7 @@ public class Controler {
     @Value("${Controler.blockingException}")
     private String errorText;
 
-    @Value("$Controler.2}")
+    @Value("${Controler.EndGame}")
     private String endGameText;
 
     /**
