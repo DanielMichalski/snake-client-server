@@ -9,7 +9,7 @@ public class KeymapUtil {
         InputStream resourceAsStream = KeymapUtil.class
                 .getResourceAsStream("/keymap/keymap.txt");
 
-        Scanner scanner = new Scanner(resourceAsStream);
+        Scanner scanner = new Scanner(resourceAsStream, "UTF-8");
 
         StringBuilder sb = new StringBuilder();
 

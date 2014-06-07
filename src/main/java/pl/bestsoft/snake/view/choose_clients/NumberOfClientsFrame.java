@@ -227,7 +227,7 @@ public class NumberOfClientsFrame extends JFrame {
         @Override
         public void run() {
             Model model = new Model();
-            Controler controler = new Controler(model, blockingQueue, howManyClients, howManyClients, true);
+            Controler controler = new Controler(model, blockingQueue, howManyClients, howManyClients, false);
             View view = new View(false);
             view.display(defaultIPNumber);
             controler.begin();
