@@ -46,6 +46,11 @@ public class NetworkModule {
     private final ConcurrentMap<PlayerID, ObjectOutputStream> objectOutputStreams = new ConcurrentHashMap<PlayerID, ObjectOutputStream>();
 
     /**
+     * Mówi nam czy rozgrywka jest rozgrywana na lokalnej maszynie czy nie
+     */
+    private final boolean isLocal;
+
+    /**
      * Maksymalna liczba klientów podłączonych do serwera.
      */
     private int numberOfClients;
@@ -64,9 +69,11 @@ public class NetworkModule {
      * Tworzy moduł sieciowy.
      *
      * @param blockingQueue kolejka blokująca do której są wrzucane eventy przez moduł sieciowy.
+     * @param isLocal
      */
-    public NetworkModule(final BlockingQueue<GameEvent> blockingQueue) {
+    public NetworkModule(final BlockingQueue<GameEvent> blockingQueue, boolean isLocal) {
         this.blockingQueue = blockingQueue;
+        this.isLocal = isLocal;
     }
 
     /**
@@ -277,7 +284,9 @@ public class NetworkModule {
          */
         @Override
         public void run() {
-            RmiServerConnection.startRmiServer();
+            if (isLocal) {
+                RmiServerConnection.startRmiServer();
+            }
             try {
                 serverSocket = new ServerSocket(5555);
             } catch (Exception e) {

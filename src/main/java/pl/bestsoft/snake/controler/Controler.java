@@ -68,17 +68,17 @@ public class Controler {
 
     /**
      * Tworzy nowy obiekt kontrolera.
-     *
-     * @param model          model
+     *  @param model          model
      * @param blockingQueue  kolejka blokująca
      * @param howManyClients liczba klientów biorących udział w rozgrywce
      * @param snakes         liczba węży na planszy
+     * @param isLocal          czy gra lokalna
      */
-    public Controler(final Model model, final BlockingQueue<GameEvent> blockingQueue, final int howManyClients, final int snakes) {
+    public Controler(final Model model, final BlockingQueue<GameEvent> blockingQueue, final int howManyClients, final int snakes, boolean isLocal) {
         this.model = model;
         this.blockingQueue = blockingQueue;
         this.snakes = snakes;
-        this.networkModule = new NetworkModule(blockingQueue);
+        this.networkModule = new NetworkModule(blockingQueue, isLocal);
         actions = fillActions();
         turningActions = fillTurning();
         playerEvents = fillPlayerEvent();

@@ -279,8 +279,8 @@ public class ChooseGameTypeWindow extends JFrame {
         public void run() {
             KeymapUtil.showDefaultKeymap();
             Model model = new Model();
-            Controler controler = new Controler(model, blockingQueue, 1, howManySnakes);
-            View view = new View();
+            Controler controler = new Controler(model, blockingQueue, 1, howManySnakes, true);
+            View view = new View(true);
             view.display(defaultIpNumber);
             controler.begin();
         }
