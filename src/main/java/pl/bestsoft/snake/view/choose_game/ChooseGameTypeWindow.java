@@ -35,25 +35,25 @@ public class ChooseGameTypeWindow extends JFrame {
 
     private static final int BUTTON_HEIGHT = 78;
 
-    @Value("${ChooseGameTypeWindow.0}")
+    @Value("${ChooseGameTypeWindow.gameType}")
     private String frameTitle;
 
-    @Value("${ChooseGameTypeWindow.1}")
+    @Value("${ChooseGameTypeWindow.OnePlayer}")
     private String player1Text;
 
-    @Value("${ChooseGameTypeWindow.2}")
+    @Value("${ChooseGameTypeWindow.TwoPlayers}")
     private String player2Text;
 
-    @Value("${ChooseGameTypeWindow.3}")
+    @Value("${ChooseGameTypeWindow.ThreePlayers}")
     private String player3Text;
 
-    @Value("${ChooseGameTypeWindow.5}")
+    @Value("${ChooseGameTypeWindow.MakeServer}")
     private String createServerText;
 
-    @Value("${ChooseGameTypeWindow.8}")
+    @Value("${ChooseGameTypeWindow.JoinGame}")
     private String joinServerText;
 
-    @Value("${ChooseGameTypeWindow.7}")
+    @Value("${ChooseGameTypeWindow.DefaultIP}")
     private String defaultIpNumber;
 
     /**
