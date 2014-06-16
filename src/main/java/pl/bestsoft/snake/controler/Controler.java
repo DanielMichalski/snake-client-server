@@ -1,6 +1,5 @@
 package pl.bestsoft.snake.controler;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import pl.bestsoft.snake.model.events.*;
 import pl.bestsoft.snake.model.fakes.FakeMap;
@@ -60,12 +59,6 @@ public class Controler {
      */
     private final Map<PlayerID, SnakeNumber> playerIDMap;
 
-    @Value("${Controler.blockingException}")
-    private String errorText;
-
-    @Value("${Controler.EndGame}")
-    private String endGameText;
-
     /**
      * Tworzy nowy obiekt kontrolera.
      *  @param model          model
@@ -96,7 +89,7 @@ public class Controler {
                 GameEvent gameEvent = blockingQueue.take();
                 actions.get(gameEvent.getClass()).perform(gameEvent);
             } catch (Exception e) {
-                System.out.println(errorText);
+                System.out.println("Blocking rzucila wyjatek");
                 e.printStackTrace();
             }
         }
@@ -182,7 +175,7 @@ public class Controler {
      */
     private void sendEndInformation() {
         if (!model.inGame()) {
-            networkModule.sendAllPlayersMessage(new InfoMessage(endGameText));
+            networkModule.sendAllPlayersMessage(new InfoMessage("Koniec Gry"));
         }
     }
 
